@@ -10,6 +10,20 @@ enum role
     developerFrontend
 };
 
+enum status
+{
+    inUse,
+    notActive,
+    notArchived
+};
+
+struct DATE
+{
+    int day;
+    int month;
+    int year;
+};
+
 struct STUDENT
 {
     string name;
@@ -18,6 +32,15 @@ struct STUDENT
     char className;
     role teamRole;
     string email;
+};
+
+struct TEAM
+{
+    string name;
+    string description;
+    DATE dateOfSetUp;
+    STUDENT teammates[4];
+    status teamStatus;
 };
 
 int main()
