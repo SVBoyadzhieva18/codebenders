@@ -24,6 +24,12 @@ struct DATE
     int year;
 };
 
+struct ADDRESS
+{
+    string streetName;
+    string streetNumber;
+};
+
 struct STUDENT
 {
     string name;
@@ -49,6 +55,16 @@ struct TEACHER
     string surname;
     TEAM teams[5];
     string email;
+};
+
+struct SCHOOL
+{
+    string name;
+    string city;
+    ADDRESS address;
+    TEACHER teachers[20];
+    TEAM teams[20];
+    STUDENT students[300];
 };
 
 int main()
