@@ -110,11 +110,40 @@ void showStudents(STUDENT* students, int index)
     }
 }
 
+void enterStudent(STUDENT* students, int& index)
+{
+    int choice;
+
+    cout << "Enter info about student:" << endl;
+
+    cout << " First and last name: ";
+    cin >> students[index].name >> students[index].surname;
+
+    cout << " Class (number and letter): ";
+    cin >> students[index].schoolYear >> students[index].className;
+
+    cout << " Role in team: "<<endl;
+    cout << "  1. Scrum Trainor" << endl;
+    cout << "  2. QA Engineer" << endl;
+    cout << "  3. Backend Developer" << endl;
+    cout << "  4. Frontend Developer" << endl;
+    cout << "Enter choice: ";
+    cin >> choice;
+    students[index].teamRole = role(choice-1);
+
+    cout << "E-mail: ";
+    cin >> students[index].email;
+
+    index++;
+}
+
 int main()
 {
     STUDENT students[100];
     int st_index = 0;
 
     initStudents(students, st_index);
+    showStudents(students, st_index);
+    enterStudent(students, st_index);
     showStudents(students, st_index);
 }
