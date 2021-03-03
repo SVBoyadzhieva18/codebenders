@@ -43,6 +43,14 @@ struct TEAM
     status teamStatus;
 };
 
+struct TEACHER
+{
+    string name;
+    string surname;
+    TEAM teams[5];
+    string email;
+};
+
 int main()
 {
    
