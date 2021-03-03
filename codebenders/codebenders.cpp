@@ -137,6 +137,16 @@ void enterStudent(STUDENT* students, int& index)
     index++;
 }
 
+void deleteStudent(STUDENT* students, int& index, int position)
+{
+    for (int i = position; i < index-1; i++)
+    {
+        students[i] = students[i + 1];
+    }
+
+    index--;
+}
+
 int main()
 {
     STUDENT students[100];
@@ -145,5 +155,6 @@ int main()
     initStudents(students, st_index);
     showStudents(students, st_index);
     enterStudent(students, st_index);
+    deleteStudent(students, st_index, 4);
     showStudents(students, st_index);
 }
