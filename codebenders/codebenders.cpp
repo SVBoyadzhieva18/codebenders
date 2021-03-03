@@ -4,7 +4,7 @@ using namespace std;
 
 enum role
 {
-    scrumTrainor,
+    scrumTrainer,
     QAEngineer,
     developerBackend,
     developerFrontend
@@ -70,16 +70,21 @@ struct SCHOOL
 
 void initStudents(STUDENT* students, int& index)
 {
-    students[0] = { "Maria", "Georgieva", 10, 'A', role::scrumTrainor, "mariaG@abv.bg" };
+    students[0] = { "Maria", "Georgieva", 10, 'A', role::scrumTrainer, "mariaG@abv.bg" };
     students[1] = { "Veselin", "Atanasov", 9, 'B', role::QAEngineer, "vesel@gmail.com" };
-    students[2] = { "Ivan", "Stanimirov", 9, 'V', role::developerBackend, "ivancho@gmail.com" };
-    students[3] = { "Georgi", "Petrov", 10, 'G', role::scrumTrainor, "gogo@abv.bg" };
+    students[2] = { "Ivan", "Stanimirov", 9, 'V', role::developerBackend, "ivancho420@gmail.com" };
+    students[3] = { "Georgi", "Ognyanov", 10, 'G', role::scrumTrainer, "gogo@abv.bg" };
     students[4] = { "Kameliya", "Ivanova", 8, 'B', role::developerFrontend, "kIvanova@codingburgas.bg" };
     students[5] = { "Zhivko", "Vladimirov", 10, 'B', role::developerBackend, "jiwkoV@abv.bg" };
     students[6] = { "Aneliya", "Shishmanova", 10, 'V', role::developerBackend, "aneliq04@gamil.com" };
     students[7] = { "Stoyan", "Dobrev", 8, 'G', role::QAEngineer, "sDobrev@abv.bg" };
+    students[8] = { "Galin", "Georgiev", 8, 'G', role::scrumTrainer, "gggeorgiev@yahoo.org" };
+    students[9] = { "Galena", "Hadzhieva", 9, 'V', role::developerBackend, "geymarkata@gmail.com"};
+    students[10] = { "Didi", "Popova", 10, 'A', role::QAEngineer, "Dida_D@abv.bg" };
+    students[11] = { "Radomir", "Liliev", 9, 'B', role::scrumTrainer, "RadoGashtite@gmail.com" };
 
-    index = 8;
+
+    index = 12;
 }
 
 void showStudent(STUDENT* students, int index)
@@ -89,7 +94,7 @@ void showStudent(STUDENT* students, int index)
     cout << "  Class: " << students[index].schoolYear << " " << students[index].className << endl;
     cout << "  Role: ";
     if (students[index].teamRole==0)
-        cout<<"Scrum Trainor"<< endl;
+        cout<<"Scrum Trainer"<< endl;
     else if (students[index].teamRole == 1)
         cout << "QA Engineer" << endl;
     else if (students[index].teamRole == 2)
@@ -123,7 +128,7 @@ void enterStudent(STUDENT* students, int& index)
     cin >> students[index].schoolYear >> students[index].className;
 
     cout << " Role in team: "<<endl;
-    cout << "  1. Scrum Trainor" << endl;
+    cout << "  1. Scrum Trainer" << endl;
     cout << "  2. QA Engineer" << endl;
     cout << "  3. Backend Developer" << endl;
     cout << "  4. Frontend Developer" << endl;
