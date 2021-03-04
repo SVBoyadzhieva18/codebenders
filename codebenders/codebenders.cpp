@@ -350,6 +350,59 @@ int updateStudentInfo() {
     return false;
 }
 
+int searchTeacherByCriteria()
+{
+    cout << "1. Name" << endl;
+    cout << "2. Number of members" << endl;
+    cout << "3. Status" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int updateTeacherInfo()
+{
+    cout << "1. Name";
+    cout << "2. Description" << endl;
+    cout << "3. Status" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
 
 int main()
 {
