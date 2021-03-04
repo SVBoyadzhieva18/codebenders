@@ -167,20 +167,127 @@ bool mainMenu()
     cin >> userChoice;
     switch (userChoice)
     {
-    case '1': 
+    case '1':
+        return true;
         break;
     case '2':
+        return true;
         break;
     case '3':
+        return true;
         break;
     default:
         cout << "Try entering a valid option" << endl;
         break;
     }
-    
+    return false;
 
 }
 
+int studentSearchMenu()
+{
+    cout << "1. Show a list of all the students";
+    cout << "2. Add a new student";
+    cout << "3. Delete a student";
+    cout << "4. Search a student by criteria";
+    cout << "5. Update info about a student";
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    case '5':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int teamSearchMenu()
+{
+    cout << "1. Show a list of all the teams";
+    cout << "2. Add a new team";
+    cout << "3. Delete a team";
+    cout << "4. Search a team by criteria";
+    cout << "5. Update info about a team";
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    case '5':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int teacherSearchMenu()
+{
+    cout << "1. Show a list of all the teachers";
+    cout << "2. Add a new teacher";
+    cout << "3. Delete a teacher";
+    cout << "4. Search a teacher by criteria";
+    cout << "5. Update info about a teacher";
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    case '5':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
 
 int main()
 {
