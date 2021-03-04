@@ -289,6 +289,68 @@ int teacherSearchMenu()
     return false;
 }
 
+int searchStudentByCriteria()
+{
+    cout << "1. Name" << endl;
+    cout << "2. Class" << endl;
+    cout << "3. Role" << endl;
+    cout << "4. Without a team" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int updateStudentInfo() {
+    cout << "1. Name" << endl;
+    cout << "2. Class" << endl;
+    cout << "3. Email" << endl;
+    cout << "4. Team role" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+
 int main()
 {
     STUDENT students[100];
