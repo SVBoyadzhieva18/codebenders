@@ -151,6 +151,36 @@ void deleteStudent(STUDENT* students, int& index, int position)
 
     index--;
 }
+void greetings()
+{
+    cout << "Hello, user!";
+}
+
+bool mainMenu()
+{
+    cout << "1. Students" << endl;
+    cout << "2. Teams" << endl;
+    cout << "3. Teachers" << endl;
+    
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1': 
+        break;
+    case '2':
+        break;
+    case '3':
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    
+
+}
+
 
 int main()
 {
