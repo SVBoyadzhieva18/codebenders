@@ -450,6 +450,60 @@ int updateTeacherInfo()
     return false;
 }
 
+int searchByStatus()
+{
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int changeStatus() 
+{
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
 int main()
 {
     STUDENT students[100];
