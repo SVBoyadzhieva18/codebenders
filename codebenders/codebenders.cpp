@@ -350,7 +350,7 @@ int updateStudentInfo() {
     return false;
 }
 
-int searchTeacherByCriteria()
+int searchTeamByCriteria()
 {
     cout << "1. Name" << endl;
     cout << "2. Number of members" << endl;
@@ -377,7 +377,7 @@ int searchTeacherByCriteria()
     return false;
 }
 
-int updateTeacherInfo()
+int updateTeamInfo()
 {
     cout << "1. Name";
     cout << "2. Description" << endl;
@@ -395,6 +395,52 @@ int updateTeacherInfo()
         return true;
         break;
     case '3':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int searchTeacherByCriteria() 
+{
+    cout << "1. Name";
+    cout << "2. Team";
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+int updateTeacherInfo()
+{
+    cout << "1. Name" << endl;
+    cout << "2. Email" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
         return true;
         break;
     default:
