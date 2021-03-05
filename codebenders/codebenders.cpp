@@ -151,9 +151,12 @@ void deleteStudent(STUDENT* students, int& index, int position)
 
     index--;
 }
+
+
+
 void greetings()
 {
-    cout << "Hello, user!";
+    cout << "Hello from us, the codebenders and welcome to out program!"<<endl<<endl;
 }
 
 int searchByStatus()
@@ -302,7 +305,7 @@ int searchTeamByCriteria()
 
 int updateTeamInfo()
 {
-    cout << "1. Name";
+    cout << "1. Name"<<endl;
     cout << "2. Description" << endl;
     cout << "3. Status" << endl;
 
@@ -330,8 +333,8 @@ int updateTeamInfo()
 
 int searchTeacherByCriteria() 
 {
-    cout << "1. Name";
-    cout << "2. Team";
+    cout << "1. Name"<<endl;
+    cout << "2. Team"<<endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -378,11 +381,12 @@ int updateTeacherInfo()
 
 int teamSearchMenu()
 {
-    cout << "1. Show a list of all the teams";
-    cout << "2. Add a new team";
-    cout << "3. Delete a team";
-    cout << "4. Search a team by criteria";
-    cout << "5. Update info about a team";
+    cout << endl;
+    cout << "1. Show a list of all the teams"<<endl;
+    cout << "2. Add a new team"<<endl;
+    cout << "3. Delete a team"<<endl;
+    cout << "4. Search a team by criteria"<<endl;
+    cout << "5. Update info about a team"<<endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -415,11 +419,12 @@ int teamSearchMenu()
 
 int teacherSearchMenu()
 {
-    cout << "1. Show a list of all the teachers";
-    cout << "2. Add a new teacher";
-    cout << "3. Delete a teacher";
-    cout << "4. Search a teacher by criteria";
-    cout << "5. Update info about a teacher";
+    cout << endl;
+    cout << "1. Show a list of all the teachers"<<endl;
+    cout << "2. Add a new teacher"<<endl;
+    cout << "3. Delete a teacher"<<endl;
+    cout << "4. Search a teacher by criteria"<<endl;
+    cout << "5. Update info about a teacher"<<endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -452,11 +457,12 @@ int teacherSearchMenu()
 
 int studentSearchMenu()
 {
-    cout << "1. Show a list of all the students";
-    cout << "2. Add a new student";
-    cout << "3. Delete a student";
-    cout << "4. Search a student by criteria";
-    cout << "5. Update info about a student";
+    cout << endl;
+    cout << "1. Show a list of all the students"<<endl;
+    cout << "2. Add a new student"<<endl;
+    cout << "3. Delete a student"<<endl;
+    cout << "4. Search a student by criteria"<<endl;
+    cout << "5. Update info about a student"<<endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -528,9 +534,12 @@ int main()
     STUDENT students[100];
     int st_index = 0;
 
-    initStudents(students, st_index);
+    greetings();
+    cout << mainMenu();
+    /*initStudents(students, st_index);
     showStudents(students, st_index);
     enterStudent(students, st_index);
     deleteStudent(students, st_index, 4);
     showStudents(students, st_index);
+    */
 }
