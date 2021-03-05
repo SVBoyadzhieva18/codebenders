@@ -156,12 +156,12 @@ void greetings()
     cout << "Hello, user!";
 }
 
-bool mainMenu()
+int searchByStatus()
 {
-    cout << "1. Students" << endl;
-    cout << "2. Teams" << endl;
-    cout << "3. Teachers" << endl;
-    
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl;
+
     char userChoice;
     cout << "Enter your choice: ";
     cin >> userChoice;
@@ -181,16 +181,13 @@ bool mainMenu()
         break;
     }
     return false;
-
 }
 
-int studentSearchMenu()
+int changeStatus()
 {
-    cout << "1. Show a list of all the students";
-    cout << "2. Add a new student";
-    cout << "3. Delete a student";
-    cout << "4. Search a student by criteria";
-    cout << "5. Update info about a student";
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -204,82 +201,6 @@ int studentSearchMenu()
         return true;
         break;
     case '3':
-        return true;
-        break;
-    case '4':
-        return true;
-        break;
-    case '5':
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
-}
-
-int teamSearchMenu()
-{
-    cout << "1. Show a list of all the teams";
-    cout << "2. Add a new team";
-    cout << "3. Delete a team";
-    cout << "4. Search a team by criteria";
-    cout << "5. Update info about a team";
-
-    char userChoice;
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case '1':
-        return true;
-        break;
-    case '2':
-        return true;
-        break;
-    case '3':
-        return true;
-        break;
-    case '4':
-        return true;
-        break;
-    case '5':
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
-}
-
-int teacherSearchMenu()
-{
-    cout << "1. Show a list of all the teachers";
-    cout << "2. Add a new teacher";
-    cout << "3. Delete a teacher";
-    cout << "4. Search a teacher by criteria";
-    cout << "5. Update info about a teacher";
-
-    char userChoice;
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case '1':
-        return true;
-        break;
-    case '2':
-        return true;
-        break;
-    case '3':
-        return true;
-        break;
-    case '4':
-        return true;
-        break;
-    case '5':
         return true;
         break;
     default:
@@ -356,6 +277,7 @@ int searchTeamByCriteria()
     cout << "2. Number of members" << endl;
     cout << "3. Status" << endl;
 
+
     char userChoice;
     cout << "Enter your choice: ";
     cin >> userChoice;
@@ -368,6 +290,7 @@ int searchTeamByCriteria()
         return true;
         break;
     case '3':
+        searchByStatus();
         return true;
         break;
     default:
@@ -395,6 +318,7 @@ int updateTeamInfo()
         return true;
         break;
     case '3':
+        changeStatus();
         return true;
         break;
     default:
@@ -450,11 +374,15 @@ int updateTeacherInfo()
     return false;
 }
 
-int searchByStatus()
+
+
+int teamSearchMenu()
 {
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl;
+    cout << "1. Show a list of all the teams";
+    cout << "2. Add a new team";
+    cout << "3. Delete a team";
+    cout << "4. Search a team by criteria";
+    cout << "5. Update info about a team";
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -470,6 +398,14 @@ int searchByStatus()
     case '3':
         return true;
         break;
+    case '4':
+        searchTeamByCriteria();
+        return true;
+        break;
+    case '5':
+        updateTeamInfo();
+        return true;
+        break;
     default:
         cout << "Try entering a valid option" << endl;
         break;
@@ -477,11 +413,13 @@ int searchByStatus()
     return false;
 }
 
-int changeStatus() 
+int teacherSearchMenu()
 {
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl;
+    cout << "1. Show a list of all the teachers";
+    cout << "2. Add a new teacher";
+    cout << "3. Delete a teacher";
+    cout << "4. Search a teacher by criteria";
+    cout << "5. Update info about a teacher";
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -497,12 +435,93 @@ int changeStatus()
     case '3':
         return true;
         break;
+    case '4':
+        searchTeacherByCriteria();
+        return true;
+        break;
+    case '5':
+        updateTeacherInfo();
+        return true;
+        break;
     default:
         cout << "Try entering a valid option" << endl;
         break;
     }
     return false;
 }
+
+int studentSearchMenu()
+{
+    cout << "1. Show a list of all the students";
+    cout << "2. Add a new student";
+    cout << "3. Delete a student";
+    cout << "4. Search a student by criteria";
+    cout << "5. Update info about a student";
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        searchStudentByCriteria();
+        return true;
+        break;
+    case '5':
+        updateStudentInfo();
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
+bool mainMenu()
+{
+    cout << "1. Students" << endl;
+    cout << "2. Teams" << endl;
+    cout << "3. Teachers" << endl;
+    cout << "4. School" << endl; //add
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        studentSearchMenu();
+        return true;
+        break;
+    case '2':
+        teamSearchMenu();
+        return true;
+        break;
+    case '3':
+        teacherSearchMenu();
+        return true;
+        break;
+    case '4':
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+
+}
+
 
 int main()
 {
