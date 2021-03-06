@@ -2,6 +2,19 @@
 #include <string>
 using namespace std;
 
+#define RESET   "\033[0m"
+
+#define RED     "\033[1;91m" 
+#define YELLOW  "\033[1;93m"  
+#define GREEN   "\033[1;92m"
+#define CYAN    "\033[0;36m"
+#define BLUE    "\033[1;96m"
+#define PURPLE  "\033[1;95m"
+
+#define WHITE   "\033[4;37m"
+#define BWhite  "\033[1;37m"  
+#define UWhite  "\033[4;37m"  
+
 enum role
 {
     scrumTrainer,
@@ -89,7 +102,7 @@ void initStudents(STUDENT* students, int& index)
 
 void showStudent(STUDENT* students, int index)
 {
-    cout << "Student ID: " << index + 1<<endl;
+    cout <<"Student ID: " << index + 1<<endl;
     cout << "  Name: "<<students[index].name << " " << students[index].surname<<endl;
     cout << "  Class: " << students[index].schoolYear << " " << students[index].className << endl;
     cout << "  Role: ";
