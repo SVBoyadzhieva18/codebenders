@@ -36,7 +36,7 @@ struct STUDENT
     string surname;
     int schoolYear;
     char className;
-    role teamRole;
+    role teamRole = role::scrumTrainer;
     string email;
 };
 
@@ -46,7 +46,7 @@ struct TEAM
     string description;
     DATE dateOfSetUp;
     STUDENT teammates[4];
-    status teamStatus;
+    status teamStatus = status::notArchived;
 };
 
 struct TEACHER
@@ -152,6 +152,100 @@ void deleteStudent(STUDENT* students, int& index, int position)
     index--;
 }
 
+
+void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
+{
+    teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive };
+    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse };
+    teams[2] = { "Cereal Killers", "Trying our best", {20, 2, 2021},  {students[0], students[1], students[5]}, status::notArchived };
+
+    t_index = 3;
+}
+
+void showTeam(STUDENT* students, TEAM* teams, int& t_index, int teamMembers)
+{
+    cout << "Name: " << teams[t_index].name<<endl;
+    cout << "Description: " << teams[t_index].description << endl;
+    cout << "Date of set-up: " << teams[t_index].dateOfSetUp.day << "/" 
+        << teams[t_index].dateOfSetUp.month << "/" << teams[t_index].dateOfSetUp.year << endl;
+    cout << "Teammates: " << endl;
+    for (int i = 0; i < teamMembers; i++)
+    {
+        cout << " " << i + 1 << ". " << teams[t_index].teammates[i].name << " " << teams[t_index].teammates[i].surname << " - ";
+       
+        if (teams[t_index].teammates[i].teamRole == 0)
+            cout << "Scrum Traner" << endl;
+        else if (teams[t_index].teammates[i].teamRole == 1)
+            cout << "QA Engineer" << endl;
+        else if (teams[t_index].teammates[i].teamRole == 2)
+            cout << "Backend Developer" << endl;
+        else
+            cout << "Frontend Developer" << endl;
+    }
+
+        cout << "Status: ";
+    if (teams[t_index].teamStatus == 0)
+        cout << "In use";
+    else if (teams[t_index].teamStatus == 1)
+        cout << "Not active";
+    else
+        cout << "Not archived";
+}
+
+void showTeams(STUDENT* students, TEAM* teams, int& t_index, int teamMembers)
+{
+    cout << "List of teams: " << endl << endl;
+    for (int i = 0; i < t_index; i++)
+    {
+        showTeam(students, teams, i, teamMembers);
+        cout << endl << endl;
+    }
+}
+
+void enterTeam(STUDENT* students,  TEAM* teams, int& t_index)
+{
+    int number,id;
+
+    cout << "Enter info about a new team:" << endl;
+
+    cout << "Name of the team: ";
+    getline (cin, teams[t_index].name);
+    
+
+    cout << "Description: ";
+    getline (cin,teams[t_index].description);
+
+    cout << "Date of set up: "<<endl;
+    cout << " Day: ";
+    cin >> teams[t_index].dateOfSetUp.day;
+    cout << " Month: ";
+    cin >> teams[t_index].dateOfSetUp.month;
+    cout << " Year: ";
+    cin >> teams[t_index].dateOfSetUp.year;
+
+    cout << "Number of members: ";
+    cin >> number;
+
+    cout << "Enter the ID numbers of the members of the team: "<<endl;
+    for (int i = 0; i < number; i++)
+    {
+        cout << " " << i + 1 << ". ";
+        cin >> id;
+        teams[t_index].teammates[i] = students[id-1];
+    }
+
+    t_index++;
+}
+
+void deleteTeam(TEAM* teams, int& t_index, int position)
+{
+    for (int i = position; i < t_index - 1; i++)
+    {
+        teams[i] = teams[i + 1];
+    }
+
+    t_index--;
+}
 
 
 void greetings()
@@ -532,14 +626,21 @@ bool mainMenu()
 int main()
 {
     STUDENT students[100];
+    TEAM teams[30];
     int st_index = 0;
-
-    greetings();
+    int t_index = 0;
+    /*greetings();
     cout << mainMenu();
-    /*initStudents(students, st_index);
+    initStudents(students, st_index);
     showStudents(students, st_index);
     enterStudent(students, st_index);
     deleteStudent(students, st_index, 4);
     showStudents(students, st_index);
     */
+
+    initStudents(students, st_index);
+    initTeams(students, st_index, teams, t_index);
+    showTeams(students, teams, t_index, 3);
+    deleteTeam(teams, t_index, 0);
+    showTeams(students, teams, t_index, 3);
 }
