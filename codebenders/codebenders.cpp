@@ -248,6 +248,76 @@ void deleteTeam(TEAM* teams, int& t_index, int position)
 }
 
 
+void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
+{
+    teachers[0] = { "Ivelina", "Staykova", {teams[0], teams[1]}, "iStaikova@abv.bg" };
+    teachers[1] = { "Yordan", "Kamenov", {teams[2]}, "yordanKA@gmail.com" };
+
+    tch_index = 2;
+}
+
+void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index, int numberTeams)
+{
+    cout << "First and last name: "<<teachers[tch_index].name<<" "<< teachers[tch_index].surname<<endl;
+    cout << "Teams they assist: "<<endl;
+    for (int i = 0; i < numberTeams; i++)
+    {
+        cout << " " << i + 1 << ". " << teachers[tch_index].teams[i].name << endl;
+    }
+    cout << "E-mail: " << teachers[tch_index].email << endl;
+}
+
+void showTeachers(TEAM* teams, TEACHER* teachers, int& tch_index, int numberTeams)
+{
+    cout << "List of teachers: " << endl << endl;
+    for (int i = 0; i < tch_index; i++)
+    {
+        showTeacher(teams, teachers, i, numberTeams);
+        cout << endl << endl;
+    }
+}
+
+void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
+{
+    int number,id; 
+
+    cout << "Enter info about teacher:" << endl;
+
+    cout << "First name: ";
+    cin >> teachers[tch_index].name;
+
+    cout << "Last name: ";
+    cin >> teachers[tch_index].surname;
+
+    cout << "E-mail: ";
+    cin >> teachers[tch_index].email;
+
+    cout << "Number of teams they assist: ";
+    cin >> number;
+
+    cout << "Enter the IDs of the teams they assist:" << endl;
+    for (int i = 0; i < number; i++)
+    {
+        cout << " " << i + 1 << ". ";
+        cin >> id;
+        teachers[tch_index].teams[i] = teams[id - 1];
+    }
+
+    tch_index++;
+}
+
+void deleteTeacher(TEACHER* teachers, int& tch_index, int position)
+{
+    for (int i = position; i < tch_index - 1; i++)
+    {
+        teachers[i] = teachers[i + 1];
+    }
+
+    tch_index--;
+}
+
+
+
 void greetings()
 {
     cout << "Hello from us, the codebenders and welcome to out program!"<<endl<<endl;
@@ -627,8 +697,12 @@ int main()
 {
     STUDENT students[100];
     TEAM teams[30];
+    TEACHER teachers[30];
+
     int st_index = 0;
     int t_index = 0;
+    int tch_index = 0;
+
     /*greetings();
     cout << mainMenu();
     initStudents(students, st_index);
@@ -640,7 +714,14 @@ int main()
 
     initStudents(students, st_index);
     initTeams(students, st_index, teams, t_index);
-    showTeams(students, teams, t_index, 3);
+
+    /*showTeams(students, teams, t_index, 3);
     deleteTeam(teams, t_index, 0);
-    showTeams(students, teams, t_index, 3);
+    showTeams(students, teams, t_index, 3);*/
+
+    initTeachers(teams, teachers, tch_index);
+    showTeachers(teams, teachers, tch_index, 2);
+    enterTeacher(teams, teachers, tch_index);
+    deleteTeacher(teachers, tch_index, 0);
+    showTeachers(teams, teachers, tch_index, 2);
 }
