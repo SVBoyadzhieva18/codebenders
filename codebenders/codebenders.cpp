@@ -177,9 +177,9 @@ void updateStudentName(STUDENT* students, int position)
 void updateStudentClass(STUDENT* students, int position)
 {
     cout << "Edit the class of the selected student:" << endl;
-    cout << "School year: ";
+    cout << " School year: ";
     cin >> students[position].schoolYear;
-    cout << "Class name (capital letter): ";
+    cout << " Class name (capital letter): ";
     cin >> students[position].className;
 }
 
@@ -188,10 +188,10 @@ void updateStudentRole(STUDENT* students, int position)
     int choice;
     cout << "Edit the role of the selected student (choose from the options listed below): " << endl<<endl;
 
-    cout << "1. Scrum Trainer" << endl;
-    cout << "2. QA Engineer" << endl;
-    cout << "3. Backend Developer" << endl;
-    cout << "4. Frontend Developer" << endl<<endl;
+    cout << " 1. Scrum Trainer" << endl;
+    cout << " 2. QA Engineer" << endl;
+    cout << " 3. Backend Developer" << endl;
+    cout << " 4. Frontend Developer" << endl<<endl;
 
     cout << "Enter your choice: ";
     cin >> choice;
@@ -209,7 +209,7 @@ void updateStudentRole(STUDENT* students, int position)
 void updateStudentEmail(STUDENT* students, int position)
 {
     cout << "Edit the e-mail of the selected student:" << endl;
-    cout << "New E-mail: ";
+    cout << " New E-mail: ";
     cin >> students[position].email;
 }
 
@@ -306,6 +306,39 @@ void deleteTeam(TEAM* teams, int& t_index, int position)
     }
 
     t_index--;
+}
+
+void updateTeamName(TEAM* teams, int pos)
+{
+    cout << "Edit the name of the selected team:" << endl;
+    cout << " New team name: ";
+    getline (cin, teams[pos].name);
+}
+
+void updateTeamDescription(TEAM* teams, int pos)
+{
+    cout << "Edit the desciption of the selected team: " << endl;
+    cout << " New team description: ";
+    getline (cin, teams[pos].description);
+}
+
+void updateTeamStatus(TEAM* teams, int pos)
+{
+    int choice;
+    cout << "Edit the status of the selected team (choose from the options listed below): " << endl;
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl<<endl;
+
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    if (choice == 1)
+        teams[pos].teamStatus == status::inUse;
+    else if (choice == 2)
+        teams[pos].teamStatus == status::notActive;
+    else
+        teams[pos].teamStatus == status::notArchived;
 }
 
 
