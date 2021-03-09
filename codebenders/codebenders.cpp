@@ -165,6 +165,54 @@ void deleteStudent(STUDENT* students, int& index, int position)
     index--;
 }
 
+void updateStudentName(STUDENT* students, int position)
+{
+    cout << "Edit the name of the selected student:" << endl;
+    cout << " First name: ";
+    cin >> students[position].name;
+    cout << " Last name: ";
+    cin >> students[position].surname;
+}
+
+void updateStudentClass(STUDENT* students, int position)
+{
+    cout << "Edit the class of the selected student:" << endl;
+    cout << "School year: ";
+    cin >> students[position].schoolYear;
+    cout << "Class name (capital letter): ";
+    cin >> students[position].className;
+}
+
+void updateStudentRole(STUDENT* students, int position)
+{
+    int choice;
+    cout << "Edit the role of the selected student (choose from the options listed below): " << endl<<endl;
+
+    cout << "1. Scrum Trainer" << endl;
+    cout << "2. QA Engineer" << endl;
+    cout << "3. Backend Developer" << endl;
+    cout << "4. Frontend Developer" << endl<<endl;
+
+    cout << "Enter your choice: ";
+    cin >> choice;
+
+    if (choice == 1)
+        students[position].teamRole == role::scrumTrainer;
+    else if (choice == 2)
+        students[position].teamRole == role::QAEngineer;
+    else if (choice == 3)
+        students[position].teamRole == role::developerBackend;
+    else
+        students[position].teamRole == role::developerFrontend;
+}
+
+void updateStudentEmail(STUDENT* students, int position)
+{
+    cout << "Edit the e-mail of the selected student:" << endl;
+    cout << "New E-mail: ";
+    cin >> students[position].email;
+}
+
 
 void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 {
@@ -556,6 +604,44 @@ int updateTeacherInfo()
 
 
 
+int studentSearchMenu()
+{
+    cout << endl;
+    cout << "1. Show a list of all the students" << endl;
+    cout << "2. Add a new student" << endl;
+    cout << "3. Delete a student" << endl;
+    cout << "4. Search a student by criteria" << endl;
+    cout << "5. Update info about a student" << endl;
+
+    char userChoice;
+    cout << "Enter your choice: ";
+    cin >> userChoice;
+    switch (userChoice)
+    {
+    case '1':
+        return true;
+        break;
+    case '2':
+        return true;
+        break;
+    case '3':
+        return true;
+        break;
+    case '4':
+        searchStudentByCriteria();
+        return true;
+        break;
+    case '5':
+        updateStudentInfo();
+        return true;
+        break;
+    default:
+        cout << "Try entering a valid option" << endl;
+        break;
+    }
+    return false;
+}
+
 int teamSearchMenu()
 {
     cout << endl;
@@ -623,44 +709,6 @@ int teacherSearchMenu()
         break;
     case '5':
         updateTeacherInfo();
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
-}
-
-int studentSearchMenu()
-{
-    cout << endl;
-    cout << "1. Show a list of all the students"<<endl;
-    cout << "2. Add a new student"<<endl;
-    cout << "3. Delete a student"<<endl;
-    cout << "4. Search a student by criteria"<<endl;
-    cout << "5. Update info about a student"<<endl;
-
-    char userChoice;
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case '1':
-        return true;
-        break;
-    case '2':
-        return true;
-        break;
-    case '3':
-        return true;
-        break;
-    case '4':
-        searchStudentByCriteria();
-        return true;
-        break;
-    case '5':
-        updateStudentInfo();
         return true;
         break;
     default:
