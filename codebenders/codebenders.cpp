@@ -262,6 +262,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
 {
     int choice;
     role option;
+
     cout << "Students in which role would you like to see?" << endl;
     cout << "1. Scrum Trainer" << endl;
     cout << "2. QA Engineer" << endl;
@@ -441,6 +442,71 @@ void removeStudentFromTeam(STUDENT* students, TEAM* teams, int t_index, int posi
     }
 
     teams[t_index].numOfStudents--;
+}
+
+void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
+{
+    string name;
+    cout << "Enter the name of the team you are looking for: ";
+    cin >> name;
+
+    cout << endl;
+
+    for (int i = 0; i < t_index; i++)
+    {
+        if (teams[i].name == name)
+        {
+            showTeam(students, teams, i);
+        }
+    }
+}
+
+void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
+{
+    int choice;
+    status option;
+
+    cout << "Teams with what status would you like to see?" << endl;
+    cout << "1. In use" << endl;
+    cout << "2. Not active" << endl;
+    cout << "3. Not archived" << endl<<endl;
+    cout << "Enter your choice: ";
+    cin >> choice;
+    cout << endl;
+
+    if (choice == 1)
+        option = status::inUse;
+    else if (choice == 2)
+        option = status::notActive;
+    else
+        option = status::notArchived;
+
+
+    for (int i = 0; i < t_index; i++)
+    {
+        if (teams[i].teamStatus == option)
+        {
+            showTeam(students, teams,  i);
+        }
+    }
+
+}
+
+void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
+{
+    int number;
+    cout << "Enter teams with how many teammates you want to see (2-4): ";
+    cin >> number;
+
+    cout << endl;
+
+    for (int i = 0; i < t_index; i++)
+    {
+        if (teams[i].numOfStudents == number)
+        {
+            showTeam(students, teams, i);
+        }
+    }
 }
 
 /*==========================================================================*/
