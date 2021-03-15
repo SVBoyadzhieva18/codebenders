@@ -49,8 +49,9 @@ struct STUDENT
     string surname;
     int schoolYear;
     char className = ' ';
-    role teamRole = role::scrumTrainer;
+    role teamRole;
     string email;
+    bool hasATeam = false;
 };
 
 struct TEAM
@@ -82,23 +83,22 @@ struct SCHOOL
     STUDENT students[300];
 };
 
-
 /*=============================================================================*/
 
 void initStudents(STUDENT* students, int& index)
 {
-    students[0] = { "Maria", "Georgieva", 10, 'A', role::scrumTrainer, "mariaG@abv.bg" };
-    students[1] = { "Veselin", "Atanasov", 9, 'B', role::QAEngineer, "vesel@gmail.com" };
-    students[2] = { "Ivan", "Stanimirov", 9, 'V', role::developerBackend, "ivancho420@gmail.com" };
-    students[3] = { "Georgi", "Ognyanov", 10, 'G', role::scrumTrainer, "gogo@abv.bg" };
-    students[4] = { "Kameliya", "Ivanova", 8, 'B', role::developerFrontend, "kIvanova@codingburgas.bg" };
-    students[5] = { "Zhivko", "Vladimirov", 10, 'B', role::developerBackend, "jiwkoV@abv.bg" };
-    students[6] = { "Aneliya", "Shishmanova", 10, 'V', role::developerBackend, "aneliq04@gamil.com" };
-    students[7] = { "Stoyan", "Dobrev", 8, 'G', role::QAEngineer, "sDobrev@abv.bg" };
-    students[8] = { "Galin", "Georgiev", 8, 'G', role::scrumTrainer, "gggeorgiev@yahoo.org" };
-    students[9] = { "Galena", "Hadzhieva", 9, 'V', role::developerBackend, "geymarkata@gmail.com" };
-    students[10] = { "Didi", "Popova", 10, 'A', role::QAEngineer, "Dida_D@abv.bg" };
-    students[11] = { "Radomir", "Liliev", 9, 'B', role::scrumTrainer, "RadoGashtite@gmail.com" };
+    students[0] = { "Maria", "Georgieva", 10, 'A', role::scrumTrainer, "mariaG@abv.bg", 1 };
+    students[1] = { "Veselin", "Atanasov", 9, 'B', role::QAEngineer, "vesel@gmail.com",1 };
+    students[2] = { "Ivan", "Stanimirov", 9, 'V', role::developerBackend, "ivancho420@gmail.com", 1 };
+    students[3] = { "Georgi", "Ognyanov", 10, 'G', role::scrumTrainer, "gogo@abv.bg", 0 };
+    students[4] = { "Kameliya", "Ivanova", 8, 'B', role::developerFrontend, "kIvanova@codingburgas.bg", 1 };
+    students[5] = { "Zhivko", "Vladimirov", 10, 'B', role::developerBackend, "jiwkoV@abv.bg", 1 };
+    students[6] = { "Aneliya", "Shishmanova", 10, 'V', role::developerBackend, "aneliq04@gamil.com", 0 };
+    students[7] = { "Stoyan", "Dobrev", 8, 'G', role::QAEngineer, "sDobrev@abv.bg", 1 };
+    students[8] = { "Galin", "Georgiev", 8, 'G', role::scrumTrainer, "gggeorgiev@yahoo.org", 0 };
+    students[9] = { "Galena", "Hadzhieva", 9, 'V', role::developerBackend, "geymarkata@gmail.com",1 };
+    students[10] = { "Didi", "Popova", 10, 'A', role::QAEngineer, "Dida_D@abv.bg", 1 };
+    students[11] = { "Radomir", "Liliev", 9, 'B', role::scrumTrainer, "RadoGashtite@gmail.com", 1 };
 
 
     index = 12;
@@ -220,7 +220,7 @@ void updateStudentEmail(STUDENT* students, int position)
 void searchStudentByName(STUDENT* students, int& index)
 {
     string name, surname;
-    cout << "Enter the first and last name of the student you are looking for: ";
+    cout << "Enter the first and last name of the student you are looking for: "<<endl;
     cout << " First name: ";
     cin >> name;
     cout << " Last name: ";
@@ -284,6 +284,19 @@ void searchStudentsByRole(STUDENT* students, int& index)
     for (int i = 0; i < index; i++)
     {
         if (students[i].teamRole == option)
+        {
+            showStudent(students, i);
+        }
+    }
+}
+
+void searchStudentsWithoutATeam(STUDENT* students, int& index)
+{
+    cout << "Students that haven't joined any team yet: " << endl << endl;
+
+    for (int i = 0; i < index; i++)
+    {
+        if (students[i].hasATeam == false)
         {
             showStudent(students, i);
         }
@@ -620,6 +633,26 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers, int tch_index, int po
     teachers[tch_index].numOfTeams--;
 }
 
+void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
+{
+    string name, surname;
+    cout << "Enter the first and last name of the teacher you are looking for: " << endl;
+    cout << "First name: ";
+    cin >> name;
+    cout << "Last name: ";
+    cin >> surname;
+
+    cout << endl;
+
+    for (int i = 0; i < tch_index; i++)
+    {
+        if (teachers[i].name == name and teachers[i].surname == surname)
+        {
+            showTeacher(teams, teachers, i);
+        }
+    }
+}
+
 /*==========================================================================*/
 
 void greetings()
@@ -849,32 +882,33 @@ int updateTeacherInfo()
 
 int studentSearchMenu()
 {
-    cout << endl;
+    int userChoice;
+
     cout << "1. Show a list of all the students" << endl;
     cout << "2. Add a new student" << endl;
     cout << "3. Delete a student" << endl;
     cout << "4. Search a student by criteria" << endl;
     cout << "5. Update info about a student" << endl;
-
-    char userChoice;
+    
     cout << "Enter your choice: ";
     cin >> userChoice;
+
     switch (userChoice)
     {
-    case '1':
+    case 1:
         return true;
         break;
-    case '2':
+    case 2:
         return true;
         break;
-    case '3':
+    case 3:
         return true;
         break;
-    case '4':
+    case 4:
         searchStudentByCriteria();
         return true;
         break;
-    case '5':
+    case 5:
         updateStudentInfo();
         return true;
         break;
@@ -887,32 +921,33 @@ int studentSearchMenu()
 
 int teamSearchMenu()
 {
-    cout << endl;
+    int userChoice;
+
     cout << "1. Show a list of all the teams" << endl;
     cout << "2. Add a new team" << endl;
     cout << "3. Delete a team" << endl;
     cout << "4. Search a team by criteria" << endl;
     cout << "5. Update info about a team" << endl;
 
-    char userChoice;
     cout << "Enter your choice: ";
     cin >> userChoice;
+
     switch (userChoice)
     {
-    case '1':
+    case 1:
         return true;
         break;
-    case '2':
+    case 2:
         return true;
         break;
-    case '3':
+    case 3:
         return true;
         break;
-    case '4':
+    case 4:
         searchTeamByCriteria();
         return true;
         break;
-    case '5':
+    case 5:
         updateTeamInfo();
         return true;
         break;
@@ -925,32 +960,33 @@ int teamSearchMenu()
 
 int teacherSearchMenu()
 {
-    cout << endl;
+    int  userChoice;
+
     cout << "1. Show a list of all the teachers" << endl;
     cout << "2. Add a new teacher" << endl;
     cout << "3. Delete a teacher" << endl;
     cout << "4. Search a teacher by criteria" << endl;
-    cout << "5. Update info about a teacher" << endl;
+    cout << "5. Update info about a teacher" << endl<<endl;
 
-    char userChoice;
     cout << "Enter your choice: ";
     cin >> userChoice;
+
     switch (userChoice)
     {
-    case '1':
+    case 1:
         return true;
         break;
-    case '2':
+    case 2:
         return true;
         break;
-    case '3':
+    case 3:
         return true;
         break;
-    case '4':
+    case 4:
         searchTeacherByCriteria();
         return true;
         break;
-    case '5':
+    case 5:
         updateTeacherInfo();
         return true;
         break;
@@ -963,29 +999,32 @@ int teacherSearchMenu()
 
 bool mainMenu()
 {
+    int userChoice;
+
+    cout << "Which sets of data would you like to work with?" << endl;
     cout << "1. Students" << endl;
     cout << "2. Teams" << endl;
     cout << "3. Teachers" << endl;
-    cout << "4. School" << endl; //add
+    cout << "4. School" << endl<<endl; //add
 
-    char userChoice;
     cout << "Enter your choice: ";
     cin >> userChoice;
+
     switch (userChoice)
     {
-    case '1':
+    case 1:
         studentSearchMenu();
         return true;
         break;
-    case '2':
+    case 2:
         teamSearchMenu();
         return true;
         break;
-    case '3':
+    case 3:
         teacherSearchMenu();
         return true;
         break;
-    case '4':
+    case 4:
         return true;
         break;
     default:
