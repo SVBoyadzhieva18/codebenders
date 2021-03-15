@@ -62,6 +62,7 @@ struct TEAM
     STUDENT teammates[4];
     status teamStatus = status::notArchived;
     int numOfStudents;
+    bool hasATeacher = false;
 };
 
 struct TEACHER
@@ -112,7 +113,7 @@ void initStudents(STUDENT* students, int& index)
 
 void showStudent(STUDENT* students, int index)
 {
-    cout << "Student ID: " << index + 1 << endl;
+    cout << "  Student ID: " << index + 1 << endl;
     cout << "  Name: " << students[index].name << " " << students[index].surname << endl;
     cout << "  Class: " << students[index].schoolYear << " " << students[index].className << endl;
     cout << "  Role: ";
@@ -134,7 +135,7 @@ void showStudents(STUDENT* students, int index)
     for (int i = 0; i < index; i++)
     {
         showStudent(students, i);
-        cout << endl;
+        cout << endl<<endl;
     }
 }
 
@@ -191,8 +192,14 @@ void deleteStudent(STUDENT* students, int& index)
     index--;
 }
 
-void updateStudentName(STUDENT* students, int position)
+void updateStudentName(STUDENT* students)
 {
+    int position;
+
+    cout << "Enter the ID of the student you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     cout << "Edit the name of the selected student:" << endl;
     cout << " First name: ";
     cin >> students[position].name;
@@ -200,8 +207,14 @@ void updateStudentName(STUDENT* students, int position)
     cin >> students[position].surname;
 }
 
-void updateStudentClass(STUDENT* students, int position)
+void updateStudentClass(STUDENT* students)
 {
+    int position;
+
+    cout << "Enter the ID of the student you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     cout << "Edit the class of the selected student:" << endl;
     cout << " School year: ";
     cin >> students[position].schoolYear;
@@ -209,8 +222,14 @@ void updateStudentClass(STUDENT* students, int position)
     cin >> students[position].className;
 }
 
-void updateStudentRole(STUDENT* students, int position)
+void updateStudentRole(STUDENT* students)
 {
+    int position;
+
+    cout << "Enter the ID of the student you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     int choice;
     cout << "Edit the role of the selected student (choose from the options listed below): " << endl << endl;
 
@@ -239,9 +258,14 @@ void updateStudentRole(STUDENT* students, int position)
         students[position].teamRole = role::developerFrontend;
 }
 
-void updateStudentEmail(STUDENT* students, int position)
+void updateStudentEmail(STUDENT* students)
 {
-    cout << "Edit the e-mail of the selected student:" << endl;
+    int position;
+
+    cout << "Enter the ID of the student you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     cout << " New E-mail: ";
     cin >> students[position].email;
 }
@@ -270,7 +294,7 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
 {
     int schoolYear;
     char className;
-    cout << "Show all the students from this class: ";
+    cout << "Show all the students from this class: "<<endl;
     cout << " School year: ";
     cin >> schoolYear;
     cout << " Class name: ";
@@ -283,6 +307,7 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
         if (students[i].schoolYear == schoolYear and students[i].className == className)
         {
             showStudent(students, i);
+            cout << endl;
         }
     }
 }
@@ -323,6 +348,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
         if (students[i].teamRole == option)
         {
             showStudent(students, i);
+            cout << endl << endl;
         }
     }
 }
@@ -336,6 +362,7 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
         if (students[i].hasATeam == false)
         {
             showStudent(students, i);
+            cout << endl << endl;
         }
     }
 }
@@ -344,9 +371,9 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
 
 void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 {
-    teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive, 3 };
-    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3 };
-    teams[2] = { "Cereal Killers", "Trying our best", {20, 2, 2021},  {students[0], students[1], students[5]}, status::notArchived, 3 };
+    teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive, 3, 1 };
+    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3, 1 };
+    teams[2] = { "Cereal Killers", "Trying our best", {20, 2, 2021},  {students[0], students[1], students[5]}, status::notArchived, 3, 1 };
 
     t_index = 3;
 }
@@ -446,22 +473,41 @@ void deleteTeam(TEAM* teams, int& t_index)
     t_index--;
 }
 
-void updateTeamName(TEAM* teams, int pos)
+void updateTeamName(TEAM* teams)
 {
-    cout << "Edit the name of the selected team:" << endl;
+    int position;
+
+    cout << "Enter the ID of the team you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
+    cin.ignore();
     cout << " New team name: ";
-    getline(cin, teams[pos].name);
+    getline(cin, teams[position].name);
 }
 
-void updateTeamDescription(TEAM* teams, int pos)
+void updateTeamDescription(TEAM* teams)
 {
-    cout << "Edit the desciption of the selected team: " << endl;
+    int position;
+
+    cout << "Enter the ID of the team you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
+    cin.ignore();
+
     cout << " New team description: ";
-    getline(cin, teams[pos].description);
+    getline(cin, teams[position].description);
 }
 
-void updateTeamStatus(TEAM* teams, int pos)
+void updateTeamStatus(TEAM* teams)
 {
+    int position;
+
+    cout << "Enter the ID of the team you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     int choice;
     cout << "Edit the status of the selected team (choose from the options listed below): " << endl;
     cout << "1. In use" << endl;
@@ -479,11 +525,11 @@ void updateTeamStatus(TEAM* teams, int pos)
     }
 
     if (choice == 1)
-        teams[pos].teamStatus = status::inUse;
+        teams[position].teamStatus = status::inUse;
     else if (choice == 2)
-        teams[pos].teamStatus = status::notActive;
+        teams[position].teamStatus = status::notActive;
     else
-        teams[pos].teamStatus = status::notArchived;
+        teams[position].teamStatus = status::notArchived;
 }
 
 void addStudentToTeam(STUDENT* students, TEAM* teams, int position)
@@ -521,8 +567,11 @@ void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
         if (teams[i].name == name)
         {
             showTeam(students, teams, i);
+            cout << endl << endl;;
         }
     }
+
+    cout << endl;
 }
 
 void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
@@ -559,6 +608,7 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
         if (teams[i].teamStatus == option)
         {
             showTeam(students, teams,  i);
+            cout << endl << endl;
         }
     }
 
@@ -570,6 +620,13 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
     cout << "Enter teams with how many teammates you want to see (2-4): ";
     cin >> number;
 
+    while (number > 4 or number < 2)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 2 and 4! Please, try again: ";
+        cin >> number;
+    }
+
     cout << endl;
 
     for (int i = 0; i < t_index; i++)
@@ -577,6 +634,7 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
         if (teams[i].numOfStudents == number)
         {
             showTeam(students, teams, i);
+            cout << endl << endl;
         }
     }
 }
@@ -660,8 +718,14 @@ void deleteTeacher(TEACHER* teachers, int& tch_index)
     tch_index--;
 }
 
-void updateTeacherName(TEACHER* teachers, int position)
+void updateTeacherName(TEACHER* teachers)
 {
+    int position;
+
+    cout << "Enter the ID of the teacher you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     cout << "Edit the name of the selected teacher:" << endl;
     cout << " First name: ";
     cin >> teachers[position].name;
@@ -669,9 +733,14 @@ void updateTeacherName(TEACHER* teachers, int position)
     cin >> teachers[position].surname;
 }
 
-void updateTeacherEmail(TEACHER* teachers, int position)
+void updateTeacherEmail(TEACHER* teachers)
 {
-    cout << "Edit the e-mail of the selected teacher:" << endl;
+    int position;
+
+    cout << "Enter the ID of the teacher you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
     cout << " New E-mail: ";
     cin >> teachers[position].email;
 }
@@ -714,6 +783,7 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
         if (teachers[i].name == name and teachers[i].surname == surname)
         {
             showTeacher(teams, teachers, i);
+            cout << endl << endl;
         }
     }
 }
@@ -732,64 +802,6 @@ void greetings()
 {
     cout << "Hello from us, the codebenders and welcome to out program!" << endl;
 }
-
-
-int searchByStatus()
-{
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl << endl;
-
-    char userChoice;
-
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case '1':
-        return true;
-        break;
-    case '2':
-        return true;
-        break;
-    case '3':
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
-}
-
-int changeStatus()
-{
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl << endl;
-
-    char userChoice;
-
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-    switch (userChoice)
-    {
-    case '1':
-        return true;
-        break;
-    case '2':
-        return true;
-        break;
-    case '3':
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
-}
-
 
 
 void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
@@ -819,12 +831,16 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     switch (userChoice)
     {
     case 1:
+        searchStudentByName(students, st_index);
         break;
     case 2:
+        seacrhStudentsByClass(students, st_index);
         break;
     case 3:
+        searchStudentsByRole(students, st_index);
         break;
     case 4:
+        searchStudentsWithoutATeam(students, st_index);
         break;
     case 5:
         displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
@@ -858,12 +874,16 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
     switch (userChoice)
     {
     case 1:
+        updateStudentName(students);
         break;
     case 2:
+        updateStudentClass(students);
         break;
     case 3:
+        updateStudentEmail(students);
         break;
     case 4:
+        updateStudentRole(students);
         break;
     case 5:
         displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
@@ -896,11 +916,13 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
     switch (userChoice)
     {
     case 1:
+        searchTeamByName(students, teams, t_index);
         break;
     case 2:
+        searchTeamByNumberOfMembers(students, teams, t_index);
         break;
     case 3:
-        searchByStatus();
+        searchTeamByStatus(students, teams, t_index);
         break;
     case 4:
         displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
@@ -932,11 +954,13 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
     switch (userChoice)
     {
     case 1:
+        updateTeamName(teams);
         break;
     case 2:
+        updateTeamDescription(teams);
         break;
     case 3:
-        changeStatus();
+        updateTeamStatus(teams);
         break;
     case 4:
         displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
@@ -968,8 +992,10 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     switch (userChoice)
     {
     case 1:
+        searchTeacherByName(teams, teachers, tch_index);
         break;
     case 2:
+
         break;
     case 3:
         displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
@@ -1000,8 +1026,10 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
     switch (userChoice)
     {
     case 1:
+        updateTeacherName(teachers);
         break;
     case 2:
+        updateTeacherEmail(teachers);
         break;
     case 3:
         displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
