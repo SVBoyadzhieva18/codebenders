@@ -655,18 +655,27 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 
 /*==========================================================================*/
 
+void spaces(int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        cout << " ";
+    }
+}
+
 void greetings()
 {
-    cout << "Hello from us, the codebenders and welcome to out program!" << endl << endl;
+    cout << "Hello from us, the codebenders and welcome to out program!" << endl;
 }
 
 int searchByStatus()
 {
     cout << "1. In use" << endl;
     cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl;
+    cout << "3. Not archived" << endl << endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -691,9 +700,10 @@ int changeStatus()
 {
     cout << "1. In use" << endl;
     cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl;
+    cout << "3. Not archived" << endl << endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -719,9 +729,10 @@ int searchStudentByCriteria()
     cout << "1. Name" << endl;
     cout << "2. Class" << endl;
     cout << "3. Role" << endl;
-    cout << "4. Without a team" << endl;
+    cout << "4. Without a team" << endl << endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -749,7 +760,7 @@ int updateStudentInfo() {
     cout << "1. Name" << endl;
     cout << "2. Class" << endl;
     cout << "3. Email" << endl;
-    cout << "4. Team role" << endl;
+    cout << "4. Team role" << endl << endl;
 
     char userChoice;
     cout << "Enter your choice: ";
@@ -779,10 +790,11 @@ int searchTeamByCriteria()
 {
     cout << "1. Name" << endl;
     cout << "2. Number of members" << endl;
-    cout << "3. Status" << endl;
+    cout << "3. Status" << endl << endl;
 
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -808,9 +820,10 @@ int updateTeamInfo()
 {
     cout << "1. Name" << endl;
     cout << "2. Description" << endl;
-    cout << "3. Status" << endl;
+    cout << "3. Status" << endl << endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -835,9 +848,10 @@ int updateTeamInfo()
 int searchTeacherByCriteria()
 {
     cout << "1. Name" << endl;
-    cout << "2. Team" << endl;
+    cout << "2. Team" << endl << endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -858,9 +872,10 @@ int searchTeacherByCriteria()
 int updateTeacherInfo()
 {
     cout << "1. Name" << endl;
-    cout << "2. Email" << endl;
+    cout << "2. Email" << endl<<endl;
 
     char userChoice;
+
     cout << "Enter your choice: ";
     cin >> userChoice;
     switch (userChoice)
@@ -879,159 +894,196 @@ int updateTeacherInfo()
 }
 
 
+void displayMainMenu();
 
-int studentSearchMenu()
+void displayStudentsMenu()
 {
-    int userChoice;
+    int userChoice = 0;
 
-    cout << "1. Show a list of all the students" << endl;
-    cout << "2. Add a new student" << endl;
-    cout << "3. Delete a student" << endl;
-    cout << "4. Search a student by criteria" << endl;
-    cout << "5. Update info about a student" << endl;
+    cout << endl;
+    cout << "STUDENTS" << endl<<endl;
+    cout << "1) Show a list of all the students" << endl;
+    cout << "2) Add a new student" << endl;
+    cout << "3) Delete a student" << endl;
+    cout << "4) Search a student by criteria" << endl;
+    cout << "5) Update info about a student" << endl;
+    cout << "6) Return back to the Main Menu" << endl << endl;
     
     cout << "Enter your choice: ";
     cin >> userChoice;
 
+    while (userChoice > 6 or userChoice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+        cin >> userChoice;
+    }
+
+    system("cls");
+
     switch (userChoice)
     {
     case 1:
-        return true;
         break;
     case 2:
-        return true;
         break;
     case 3:
-        return true;
         break;
     case 4:
         searchStudentByCriteria();
-        return true;
         break;
     case 5:
         updateStudentInfo();
-        return true;
         break;
-    default:
-        cout << "Try entering a valid option" << endl;
+    case 6:
+        displayMainMenu();
         break;
     }
-    return false;
+   
 }
 
-int teamSearchMenu()
+void displayTeamsMenu()
 {
-    int userChoice;
-
-    cout << "1. Show a list of all the teams" << endl;
-    cout << "2. Add a new team" << endl;
-    cout << "3. Delete a team" << endl;
-    cout << "4. Search a team by criteria" << endl;
-    cout << "5. Update info about a team" << endl;
+    int userChoice = 0;
+    
+    cout << endl;
+    cout << "TEAMS" << endl<<endl;
+    cout << "1) Show a list of all the teams" << endl;
+    cout << "2) Add a new team" << endl;
+    cout << "3) Delete a team" << endl;
+    cout << "4) Search a team by criteria" << endl;
+    cout << "5) Update info about a team" << endl;
+    cout << "6) Return back to the Main Menu" << endl << endl;
 
     cout << "Enter your choice: ";
     cin >> userChoice;
 
+    while (userChoice > 5 or userChoice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+        cin >> userChoice;
+    }
+
+    system("cls");
+
     switch (userChoice)
     {
     case 1:
-        return true;
         break;
     case 2:
-        return true;
         break;
     case 3:
-        return true;
         break;
     case 4:
         searchTeamByCriteria();
-        return true;
         break;
     case 5:
         updateTeamInfo();
-        return true;
         break;
-    default:
-        cout << "Try entering a valid option" << endl;
+    case 6:
+        displayMainMenu();
         break;
     }
-    return false;
+
 }
 
-int teacherSearchMenu()
+void displayTeachersMenu()
 {
-    int  userChoice;
+    int  userChoice = 0; 
 
-    cout << "1. Show a list of all the teachers" << endl;
-    cout << "2. Add a new teacher" << endl;
-    cout << "3. Delete a teacher" << endl;
-    cout << "4. Search a teacher by criteria" << endl;
-    cout << "5. Update info about a teacher" << endl<<endl;
+        cout << endl;
+        cout << "TEACHERS" << endl<<endl;
+        cout << "1) Show a list of all the teachers" << endl;
+        cout << "2) Add a new teacher" << endl;
+        cout << "3) Delete a teacher" << endl;
+        cout << "4) Search a teacher by criteria" << endl;
+        cout << "5) Update info about a teacher" << endl;
+        cout << "6) Return back to the Main Menu" << endl << endl;
 
-    cout << "Enter your choice: ";
-    cin >> userChoice;
+        cout << "Enter your choice: ";
+        cin >> userChoice;
 
-    switch (userChoice)
-    {
-    case 1:
-        return true;
-        break;
-    case 2:
-        return true;
-        break;
-    case 3:
-        return true;
-        break;
-    case 4:
-        searchTeacherByCriteria();
-        return true;
-        break;
-    case 5:
-        updateTeacherInfo();
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
-    }
-    return false;
+        while (userChoice > 6 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            cin >> userChoice;
+        }
+
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            searchTeacherByCriteria();
+            break;
+        case 5:
+            updateTeacherInfo();
+            break;
+        case 6:
+            displayMainMenu();
+            break;
+        }
+    
+   
 }
 
-bool mainMenu()
+void displayMainMenu()
 {
-    int userChoice;
+    int userChoice = 0;
 
-    cout << "Which sets of data would you like to work with?" << endl;
-    cout << "1. Students" << endl;
-    cout << "2. Teams" << endl;
-    cout << "3. Teachers" << endl;
-    cout << "4. School" << endl<<endl; //add
-
-    cout << "Enter your choice: ";
-    cin >> userChoice;
-
-    switch (userChoice)
+    while (userChoice != 5)
     {
-    case 1:
-        studentSearchMenu();
-        return true;
-        break;
-    case 2:
-        teamSearchMenu();
-        return true;
-        break;
-    case 3:
-        teacherSearchMenu();
-        return true;
-        break;
-    case 4:
-        return true;
-        break;
-    default:
-        cout << "Try entering a valid option" << endl;
-        break;
+        cout << endl;
+        cout << "MAIN MENU" << endl << endl;
+        cout << "Which sets of data would you like to work with?" << endl;
+        cout << "1) Students" << endl;
+        cout << "2) Teams" << endl;
+        cout << "3) Teachers" << endl;
+        cout << "4) School" << endl;
+        cout << "5) Exit" << endl << endl;
+
+        cout << "Enter your choice: ";
+        cin >> userChoice;
+
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cin >> userChoice;
+        }
+
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            displayStudentsMenu();
+            break;
+        case 2:
+            displayTeamsMenu();
+            break;
+        case 3:
+            displayTeachersMenu();
+            break;
+        case 4:
+            // return true;
+            break;
+        case 5:
+            exit(0);
+            break;
+        }
     }
-    return false;
 
 }
 
@@ -1046,6 +1098,9 @@ int main()
     int t_index = 0;
     int tch_index = 0;
 
+    greetings();
+    displayMainMenu();
+
     /*greetings();
     cout << mainMenu();
     initStudents(students, st_index);
@@ -1055,16 +1110,16 @@ int main()
     showStudents(students, st_index);
     */
 
-    initStudents(students, st_index);
-    initTeams(students, st_index, teams, t_index);
+    /*initStudents(students, st_index);
+    initTeams(students, st_index, teams, t_index);*/
 
     /*showTeams(students, teams, t_index, 3);
     deleteTeam(teams, t_index, 0);
     showTeams(students, teams, t_index, 3);*/
 
-    initTeachers(teams, teachers, tch_index);
+    /*initTeachers(teams, teachers, tch_index);
     showTeachers(teams, teachers, tch_index);
     enterTeacher(teams, teachers, tch_index);
     deleteTeacher(teachers, tch_index, 0);
-    showTeachers(teams, teachers, tch_index);
+    showTeachers(teams, teachers, tch_index);*/
 }
