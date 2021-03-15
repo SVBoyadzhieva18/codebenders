@@ -83,6 +83,10 @@ struct SCHOOL
     STUDENT students[300];
 };
 
+void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
+void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
+void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
+void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
 
 
 /*=============================================================================*/
@@ -140,8 +144,10 @@ void enterStudent(STUDENT* students, int& index)
 
     cout << "Enter info about student:" << endl;
 
-    cout << " First and last name: ";
-    cin >> students[index].name >> students[index].surname;
+    cout << " First name: ";
+    cin >> students[index].name;
+    cout << " Last name: ";
+    cin >> students[index].surname;
 
     cout << " Class (number and letter): ";
     cin >> students[index].schoolYear >> students[index].className;
@@ -151,8 +157,16 @@ void enterStudent(STUDENT* students, int& index)
     cout << "  2. QA Engineer" << endl;
     cout << "  3. Backend Developer" << endl;
     cout << "  4. Frontend Developer" << endl;
-    cout << "Enter choice: ";
+    cout << "Enter your choice: ";
     cin >> choice;
+
+    while (choice > 4 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cin >> choice;
+    }
+
     students[index].teamRole = role(choice - 1);
 
     cout << "E-mail: ";
@@ -161,8 +175,14 @@ void enterStudent(STUDENT* students, int& index)
     index++;
 }
 
-void deleteStudent(STUDENT* students, int& index, int position)
+void deleteStudent(STUDENT* students, int& index)
 {
+    int position;
+
+    cout << "Enter the ID of the student you would like to remove from the list: ";
+    cin >> position;
+    position -= 1;
+
     for (int i = position; i < index - 1; i++)
     {
         students[i] = students[i + 1];
@@ -201,6 +221,13 @@ void updateStudentRole(STUDENT* students, int position)
 
     cout << "Enter your choice: ";
     cin >> choice;
+
+    while (choice > 4 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cin >> choice;
+    }
 
     if (choice == 1)
         students[position].teamRole = role::scrumTrainer;
@@ -272,6 +299,14 @@ void searchStudentsByRole(STUDENT* students, int& index)
     cout << "4. Frontend Developer" << endl<<endl;
     cout << "Enter your choice: ";
     cin >> choice;
+
+    while (choice > 4 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cin >> choice;
+    }
+
     cout << endl;
 
     if (choice == 1)
@@ -363,13 +398,14 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
 
     cout << "Enter info about a new team:" << endl;
 
+    cin.ignore();
+
     cout << "Name of the team: ";
     getline(cin, teams[t_index].name);
-
-
+    
     cout << "Description: ";
     getline(cin, teams[t_index].description);
-
+    
     cout << "Date of set up: " << endl;
     cout << " Day: ";
     cin >> teams[t_index].dateOfSetUp.day;
@@ -394,8 +430,14 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
     t_index++;
 }
 
-void deleteTeam(TEAM* teams, int& t_index, int position)
+void deleteTeam(TEAM* teams, int& t_index)
 {
+    int position;
+
+    cout << "Enter the ID of the team you would like to remove from the list: ";
+    cin >> position;
+    position -= 1;
+
     for (int i = position; i < t_index - 1; i++)
     {
         teams[i] = teams[i + 1];
@@ -428,6 +470,13 @@ void updateTeamStatus(TEAM* teams, int pos)
 
     cout << "Enter your choice: ";
     cin >> choice;
+
+    while (choice > 3 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        cin >> choice;
+    }
 
     if (choice == 1)
         teams[pos].teamStatus = status::inUse;
@@ -487,6 +536,14 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
     cout << "3. Not archived" << endl<<endl;
     cout << "Enter your choice: ";
     cin >> choice;
+
+    while (choice > 3 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        cin >> choice;
+    }
+
     cout << endl;
 
     if (choice == 1)
@@ -587,8 +644,14 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
     tch_index++;
 }
 
-void deleteTeacher(TEACHER* teachers, int& tch_index, int position)
+void deleteTeacher(TEACHER* teachers, int& tch_index)
 {
+    int position;
+
+    cout << "Enter the ID of the teacher you would like to remove from the list: ";
+    cin >> position;
+    position -= 1;
+
     for (int i = position; i < tch_index - 1; i++)
     {
         teachers[i] = teachers[i + 1];
@@ -670,9 +733,6 @@ void greetings()
     cout << "Hello from us, the codebenders and welcome to out program!" << endl;
 }
 
-void displayTeachersMenu();
-void displayTeamsMenu();
-void displayStudentsMenu();
 
 int searchByStatus()
 {
@@ -732,7 +792,7 @@ int changeStatus()
 
 
 
-void searchStudentMenu()
+void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -767,12 +827,12 @@ void searchStudentMenu()
     case 4:
         break;
     case 5:
-        displayStudentsMenu();
+        displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
     
 }
 
-void  updateStudentInfoMenu() 
+void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -806,12 +866,12 @@ void  updateStudentInfoMenu()
     case 4:
         break;
     case 5:
-        displayStudentsMenu();
+        displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
     
 }
 
-void searchTeamMenu()
+void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -843,11 +903,11 @@ void searchTeamMenu()
         searchByStatus();
         break;
     case 4:
-        displayTeamsMenu();
+        displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
 }
 
-void updateTeamInfoMenu()
+void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -879,12 +939,12 @@ void updateTeamInfoMenu()
         changeStatus();
         break;
     case 4:
-        displayTeamsMenu();
+        displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
  
 }
 
-void searchTeacherMenu()
+void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -912,11 +972,11 @@ void searchTeacherMenu()
     case 2:
         break;
     case 3:
-        displayTeachersMenu();
+        displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
 }
 
-void updateTeacherInfoMenu()
+void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice;
 
@@ -944,15 +1004,15 @@ void updateTeacherInfoMenu()
     case 2:
         break;
     case 3:
-        displayTeachersMenu();
+        displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
     }
   
 }
 
 
-void displayMainMenu();
 
-void displayStudentsMenu()
+
+void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice = 0;
 
@@ -980,25 +1040,28 @@ void displayStudentsMenu()
     switch (userChoice)
     {
     case 1:
+        showStudents(students, st_index);
         break;
     case 2:
+        enterStudent(students,  st_index);
         break;
     case 3:
+        deleteStudent(students, st_index);
         break;
     case 4:
-        searchStudentMenu();
+        searchStudentMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     case 5:
-        updateStudentInfoMenu();
+        updateStudentInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     case 6:
-        displayMainMenu();
+        displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     }
    
 }
 
-void displayTeamsMenu()
+void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice = 0;
     
@@ -1014,10 +1077,10 @@ void displayTeamsMenu()
     cout << "Enter your choice: ";
     cin >> userChoice;
 
-    while (userChoice > 5 or userChoice < 1)
+    while (userChoice > 6 or userChoice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+        cout << "The number you enter has to be between 1 and 6! Please, try again: ";
         cin >> userChoice;
     }
 
@@ -1026,25 +1089,28 @@ void displayTeamsMenu()
     switch (userChoice)
     {
     case 1:
+        showTeams(students, teams, t_index);
         break;
     case 2:
+        enterTeam(students, teams, t_index);
         break;
     case 3:
+        deleteTeam(teams, t_index);
         break;
     case 4:
-        searchTeamMenu();
+        searchTeamMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     case 5:
-        updateTeamInfoMenu();
+        updateTeamInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     case 6:
-        displayMainMenu();
+        displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
         break;
     }
 
 }
 
-void displayTeachersMenu()
+void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
     int  userChoice = 0; 
 
@@ -1072,22 +1138,22 @@ void displayTeachersMenu()
         switch (userChoice)
         {
         case 1:
-            
+            showTeachers(teams, teachers, tch_index);
             break;
         case 2:
-            
+            enterTeacher(teams, teachers, tch_index);
             break;
         case 3:
-            
+            deleteTeacher(teachers, tch_index);
             break;
         case 4:
-            searchTeacherMenu();
+            searchTeacherMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         case 5:
-            updateTeacherInfoMenu();
+            updateTeacherInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         case 6:
-            displayMainMenu();
+            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         }
     
@@ -1096,7 +1162,7 @@ void displayTeachersMenu()
 
 
 
-void displayMainMenu()
+void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_index, TEACHER* teachers, int& tch_index)
 {
     int userChoice = 0;
 
@@ -1104,7 +1170,7 @@ void displayMainMenu()
     {
         cout << endl;
         cout << "MAIN MENU" << endl << endl;
-        cout << "Which sets of data would you like to work with?" << endl;
+        cout << "Which sets of data would you like to work with?" << endl << endl;
         cout << "1) Students" << endl;
         cout << "2) Teams" << endl;
         cout << "3) Teachers" << endl;
@@ -1126,16 +1192,15 @@ void displayMainMenu()
         switch (userChoice)
         {
         case 1:
-            displayStudentsMenu();
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         case 2:
-            displayTeamsMenu();
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         case 3:
-            displayTeachersMenu();
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
             break;
         case 4:
-            // return true;
             break;
         case 5:
             exit(0);
@@ -1156,8 +1221,12 @@ int main()
     int t_index = 0;
     int tch_index = 0;
 
+    initStudents(students, st_index);
+    initTeams(students, st_index, teams, t_index);
+    initTeachers(teams, teachers, tch_index);
+
     greetings();
-    displayMainMenu();
+    displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
 
     /*greetings();
     cout << mainMenu();
