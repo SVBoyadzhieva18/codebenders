@@ -15,6 +15,7 @@ using namespace std;
 #define BWhite  "\033[1;37m"  
 #define UWhite  "\033[4;37m"  
 
+
 enum role
 {
     scrumTrainer,
@@ -83,6 +84,7 @@ struct SCHOOL
     TEAM teams[20];
     STUDENT students[300];
 };
+
 
 void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
 void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
@@ -372,7 +374,7 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
 void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 {
     teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive, 3, 1 };
-    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3, 1 };
+    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3, 0 };
     teams[2] = { "Cereal Killers", "Trying our best", {20, 2, 2021},  {students[0], students[1], students[5]}, status::notArchived, 3, 1 };
 
     t_index = 3;
@@ -532,26 +534,53 @@ void updateTeamStatus(TEAM* teams)
         teams[position].teamStatus = status::notArchived;
 }
 
-void addStudentToTeam(STUDENT* students, TEAM* teams, int position)
+void addStudentToTeam(STUDENT* students, TEAM* teams)
 {
+    int position;
+
+    cout << "Enter the ID of the team you would like to edit: ";
+    cin >> position;
+    position -= 1;
+    cout << endl;
+
     int id;
     cout << "Enter the ID number of the student you want to be added to the selected team: ";
     cin >> id;
 
     teams[position].teammates[teams[position].numOfStudents] = students[id - 1];
     teams[position].numOfStudents++;
+    students[id - 1].hasATeam = true;
 }
 
-void removeStudentFromTeam(STUDENT* students, TEAM* teams, int t_index, int position)
+void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 {
-    int numberOfStudents = teams[t_index].numOfStudents;
+    int position;
+    cout << "Enter the ID of the team you would like to edit: ";
+    cin >> position;
+    position -= 1;
+    cout << endl;
 
-    for (int i = position; i < numberOfStudents - 1; i++)
+    int id;
+    cout << "Enter the ID number of the student you want to be removed from the selected team: ";
+    cin >> id;
+    id -= 1;
+
+    int numberOfMembers = teams[position].numOfStudents;
+    int posInTeam;
+
+    for (int i = 0; i < numberOfMembers; i++)
     {
-        teams[t_index].teammates[i] = teams[t_index].teammates[i + 1];
+        if (teams[position].teammates[i].email == students[id].email)
+            posInTeam = i;
     }
 
-    teams[t_index].numOfStudents--;
+    for (int i = posInTeam; i < numberOfMembers - 1; i++)
+    {
+        teams[position].teammates[i] = teams[position].teammates[i + 1];
+    }
+
+    teams[position].numOfStudents--;
+    students[id].hasATeam = false;
 }
 
 void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
@@ -638,6 +667,21 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
         }
     }
 }
+
+void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
+{
+    cout << "Teams that haven't got any teacher yet: " << endl << endl;
+
+    for (int i = 0; i < t_index; i++)
+    {
+        if (teams[i].hasATeacher == false)
+        {
+            showTeam(students, teams, t_index);
+            cout << endl << endl;
+        }
+    }
+}
+
 
 /*==========================================================================*/
 
@@ -753,6 +797,7 @@ void addTeamToTeacher(TEAM* teams, TEACHER* teachers, int position)
 
     teachers[position].teams[teachers[position].numOfTeams] = teams[id - 1];
     teachers[position].numOfTeams++;
+    teams[id - 1].hasATeacher = true;
 }
 
 void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers, int tch_index, int position)
@@ -787,6 +832,7 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
         }
     }
 }
+
 
 /*==========================================================================*/
 
@@ -899,15 +945,16 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
     cout << "1) Name" << endl;
     cout << "2) Number of members" << endl;
     cout << "3) Status" << endl;
-    cout << "4) Return back to Teams Menu" << endl << endl;
+    cout << "4) Teams which don't have a teacher" << endl;
+    cout << "5) Return back to Teams Menu" << endl << endl;
 
     cout << "Enter your choice: ";
     cin >> userChoice;
 
-    while (userChoice > 4 or userChoice < 1)
+    while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
         cin >> userChoice;
     }
 
@@ -923,9 +970,12 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
         break;
     case 3:
         searchTeamByStatus(students, teams, t_index);
-        break;
     case 4:
+        searchTeamsWithoutATeacher(students, teams, t_index);
+        break;
+    case 5:
         displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+        break;
     }
 }
 
@@ -937,15 +987,17 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
     cout << "1) Name" << endl;
     cout << "2) Description" << endl;
     cout << "3) Status" << endl;
-    cout << "4) Return back to Teams Menu" << endl << endl;
+    cout << "4) Add a new member to a team" << endl;
+    cout << "5) Remove a student from a team" << endl;
+    cout << "6) Return back to Teams Menu" << endl << endl;
 
     cout << "Enter your choice: ";
     cin >> userChoice;
 
-    while (userChoice > 4 or userChoice < 1)
+    while (userChoice > 6 or userChoice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cout << "The number you enter has to be between 1 and 6! Please, try again: ";
         cin >> userChoice;
     }
 
@@ -963,7 +1015,14 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
         updateTeamStatus(teams);
         break;
     case 4:
+        addStudentToTeam(students, teams);
+        break;
+    case 5:
+        removeStudentFromTeam(students, teams);
+        break;
+    case 6:
         displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+        break;
     }
  
 }
@@ -1036,8 +1095,6 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
     }
   
 }
-
-
 
 
 void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
@@ -1187,7 +1244,6 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     
    
 }
-
 
 
 void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_index, TEACHER* teachers, int& tch_index)
