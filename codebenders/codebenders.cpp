@@ -1340,12 +1340,17 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
         cout << "   | |/ _ \\/ _` | '_ ` _ \\/ __|" << endl;
         cout << "   | |  __/ (_| | | | | | \\__ \\" << endl;
         cout << "   |_|\\___|\\__,_|_| |_| |_|___/" << RESET << endl << endl;
-        cout <<YELLOW<< "1)"<<RESET<<" Show a list of all the teams" << endl;
-        cout << BLUE << "2)" << RESET << " Add a new team" << endl;
-        cout << RED<<"3)"<<RESET<<" Delete a team" << endl;
-        cout << CYAN << "4)" << RESET << " Search a team by criteria" << endl;
-        cout << PURPLE<<"5)"<<RESET<<" Update info about a team" << endl;
-        cout << GRAY<<"6)"<<RESET<<" Return back to the Main Menu" << endl << endl;
+        cout << "  ======================================" << endl;
+        cout <<"||"<< YELLOW<< "1)"<<RESET<<" Show a list of all the teams"<<"       ||" << endl;
+        cout <<"||"<< BLUE << "2)" << RESET << " Add a new team" << "                     ||" << endl;
+        cout <<"||"<< RED<<"3)"<<RESET<<" Delete a team" << "                      ||" << endl;
+        cout <<"||"<< CYAN << "4)" << RESET << " Search a team by criteria" << "          ||" << endl;
+        cout <<"||"<< PURPLE<<"5)"<<RESET<<" Update info about a team" << "           ||" << endl;
+        cout << "||" << GRAY << "6)" << RESET << " Return back to the Main Menu" << "       ||" << endl;
+
+        cout << "  ======================================";
+        cout << endl;
+        cout << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
@@ -1397,13 +1402,19 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
        int  userChoice = 0;
        
         cout << endl;
-        cout <<CYAN<< "TEACHERS"<< RESET << endl << endl;
-        cout << "1) Show a list of all the teachers" << endl;
-        cout << "2) Add a new teacher" << endl;
-        cout << "3) Delete a teacher" << endl;
-        cout << "4) Search a teacher by criteria" << endl;
-        cout << "5) Update info about a teacher" << endl;
-        cout << "6) Return back to the Main Menu" << endl << endl;
+        
+        cout <<CYAN<< " _____ _____    _    ____ _   _ _____ ____  ____  " << endl;
+        cout << "|_   _| ____|  / \\  / ___| | | | ____|  _ \\/ ___| " << endl;
+        cout << "  | | |  _|   / _ \\| |   | |_| |  _| | |_) \\___ \\ " << endl;
+        cout << "  | | | |___ / ___ \\ |___|  _  | |___|  _ < ___) |" << endl;
+        cout << "  |_| |_____/_/   \\_\\____|_| |_|_____|_| \\_\\____/ " << RESET << endl<< endl;
+                                                   
+        cout << BLUE<<"1)"<<RESET<<" Show a list of all the teachers" << endl;
+        cout << PURPLE << "2)" << RESET << " Add a new teacher" << endl;
+        cout << RED << "3)" << RESET << " Delete a teacher" << endl;
+        cout << YELLOW << "4)" << RESET << " Search a teacher by criteria" << endl;
+        cout << GREEN << "5)" << RESET << " Update info about a teacher" << endl;
+        cout << GRAY << "6)" << RESET << " Return back to the Main Menu" << endl << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
