@@ -382,6 +382,7 @@ void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 
 void showTeam(STUDENT* students, TEAM* teams, int& t_index)
 {
+    cout << "ID: " << t_index + 1<<endl;
     cout << "Name: " << teams[t_index].name << endl;
     cout << "Description: " << teams[t_index].description << endl;
     cout << "Date of set-up: " << teams[t_index].dateOfSetUp.day << "/"
@@ -696,6 +697,7 @@ void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
 void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int numOfTeams = teachers[tch_index].numOfTeams;
+    cout << "ID: " << tch_index + 1<< endl;
     cout << "First and last name: " << teachers[tch_index].name << " " << teachers[tch_index].surname << endl;
     cout << "Teams they assist: " << endl;
     for (int i = 0; i < numOfTeams; i++)
