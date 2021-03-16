@@ -1007,12 +1007,12 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
     {
         int userChoice;
 
-        cout << "What would you like to update?" << endl << endl;
-        cout << "1) Name" << endl;
-        cout << "2) Class" << endl;
-        cout << "3) Email" << endl;
-        cout << "4) Team role" << endl;
-        cout << "5) Return back to Students Menu" << endl << endl;
+        cout <<YELLOW<< "What would you like to update?" <<RESET<< endl << endl;
+        cout <<GREEN<< "1)"<<RESET<<" Name" << endl;
+        cout <<BLUE<< "2)"<<RESET<<" Class" << endl;
+        cout <<CYAN<< "3)"<<RESET<<" Email" << endl;
+        cout <<PURPLE<< "4)"<<RESET<<" Team role" << endl;
+        cout << GRAY << "5)" << RESET << " Return back to Students Menu" << endl << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
@@ -1060,13 +1060,12 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
     {
         int userChoice;
 
-        cout << "By what criteria do you want to search for a team/-s?" << endl << endl;
-        cout << "1) Name" << endl;
-        cout << "2) Number of members" << endl;
-        cout << "3) Status" << endl;
-        cout << "4) Teams which don't have a teacher" << endl;
-        cout << "5) Return back to Teams Menu" << endl << endl;
-
+        cout << GREEN << "By what criteria do you want to search for a team/-s?" << RESET << endl << endl;
+        cout << YELLOW << "1)" << RESET << " Name" << endl;
+        cout << CYAN << "2)" << RESET << " Number of members" << endl;
+        cout << BLUE << "3)" << RESET << " Status" << endl;
+        cout << PURPLE << "4)" << RESET << " Teams which don't have a teacher" << endl;
+        cout << GRAY << "5)" << RESET << " Return back to Teams Menu" << endl << endl;
         cout << "Enter your choice: ";
         userChoice = readInt();
 
@@ -1112,13 +1111,13 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
     {
         int userChoice;
 
-        cout << "What would you like to update?" << endl << endl;
-        cout << "1) Name" << endl;
-        cout << "2) Description" << endl;
-        cout << "3) Status" << endl;
-        cout << "4) Add a new member to a team" << endl;
-        cout << "5) Remove a student from a team" << endl;
-        cout << "6) Return back to Teams Menu" << endl << endl;
+        cout << GREEN << "What would you like to update?" << RESET << endl << endl;
+        cout <<YELLOW<< "1)"<<RESET<<" Name" << endl;
+        cout << CYAN << "2)" << RESET << " Description" << endl;
+        cout << BLUE << "3)" << RESET << " Status" << endl;
+        cout << PURPLE << "4)" << RESET << " Add a new member to a team" << endl;
+        cout << RED << "5)" << RESET << " Remove a student from a team" << endl;
+        cout << GRAY << "6)" << RESET << " Return back to Teams Menu" << endl << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
