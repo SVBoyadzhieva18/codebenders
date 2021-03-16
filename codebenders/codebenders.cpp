@@ -86,6 +86,22 @@ struct SCHOOL
 };
 
 
+int readInt() 
+{
+    int number;
+
+    //while loop until the value entered is an integer
+    while (!(cin >> number)) {
+
+        cin.clear();
+        cin.ignore(INT_MAX, '\n');
+        cout << endl;
+        cout << "You have to enter a number. Please, try again: ";
+    }
+
+    return number;
+}
+
 void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
 void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
 void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
@@ -152,8 +168,11 @@ void enterStudent(STUDENT* students, int& index)
     cout << " Last name: ";
     cin >> students[index].surname;
 
-    cout << " Class (number and letter): ";
-    cin >> students[index].schoolYear >> students[index].className;
+    cout << " Class: " << endl;
+    cout << "School year: ";
+    students[index].schoolYear = readInt();
+    cout << "Class name: ";
+    cin >> students[index].className;
 
     cout << " Role in team: " << endl;
     cout << "  1. Scrum Trainer" << endl;
@@ -161,13 +180,13 @@ void enterStudent(STUDENT* students, int& index)
     cout << "  3. Backend Developer" << endl;
     cout << "  4. Frontend Developer" << endl;
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readInt();
 
     while (choice > 4 or choice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 4! Please, try again: ";
-        cin >> choice;
+        choice = readInt();
     }
 
     students[index].teamRole = role(choice - 1);
@@ -183,7 +202,7 @@ void deleteStudent(STUDENT* students, int& index)
     int position;
 
     cout << "Enter the ID of the student you would like to remove from the list: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     for (int i = position; i < index - 1; i++)
@@ -199,7 +218,7 @@ void updateStudentName(STUDENT* students)
     int position;
 
     cout << "Enter the ID of the student you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << "Edit the name of the selected student:" << endl;
@@ -214,12 +233,12 @@ void updateStudentClass(STUDENT* students)
     int position;
 
     cout << "Enter the ID of the student you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << "Edit the class of the selected student:" << endl;
     cout << " School year: ";
-    cin >> students[position].schoolYear;
+    students[position].schoolYear = readInt();
     cout << " Class name (capital letter): ";
     cin >> students[position].className;
 }
@@ -229,7 +248,7 @@ void updateStudentRole(STUDENT* students)
     int position;
 
     cout << "Enter the ID of the student you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     int choice;
@@ -241,13 +260,13 @@ void updateStudentRole(STUDENT* students)
     cout << " 4. Frontend Developer" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readInt();
 
     while (choice > 4 or choice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 4! Please, try again: ";
-        cin >> choice;
+        choice = readInt();
     }
 
     if (choice == 1)
@@ -265,7 +284,7 @@ void updateStudentEmail(STUDENT* students)
     int position;
 
     cout << "Enter the ID of the student you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << " New E-mail: ";
@@ -298,7 +317,7 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
     char className;
     cout << "Show all the students from this class: "<<endl;
     cout << " School year: ";
-    cin >> schoolYear;
+    schoolYear = readInt();
     cout << " Class name: ";
     cin >> className;
 
@@ -325,13 +344,13 @@ void searchStudentsByRole(STUDENT* students, int& index)
     cout << "3. Backend Developer" << endl;
     cout << "4. Frontend Developer" << endl<<endl;
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readInt();
 
     while (choice > 4 or choice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 4! Please, try again: ";
-        cin >> choice;
+        choice = readInt();
     }
 
     cout << endl;
@@ -438,14 +457,14 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
     
     cout << "Date of set up: " << endl;
     cout << " Day: ";
-    cin >> teams[t_index].dateOfSetUp.day;
+    teams[t_index].dateOfSetUp.day = readInt();
     cout << " Month: ";
-    cin >> teams[t_index].dateOfSetUp.month;
+    teams[t_index].dateOfSetUp.month = readInt();
     cout << " Year: ";
-    cin >> teams[t_index].dateOfSetUp.year;
+    teams[t_index].dateOfSetUp.year = readInt();
 
     cout << "Number of members: ";
-    cin >> number;
+    number = readInt();
 
     teams[t_index].numOfStudents = number;
 
@@ -453,7 +472,7 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
     for (int i = 0; i < number; i++)
     {
         cout << " " << i + 1 << ". ";
-        cin >> id;
+        id = readInt();
         teams[t_index].teammates[i] = students[id - 1];
     }
 
@@ -465,7 +484,7 @@ void deleteTeam(TEAM* teams, int& t_index)
     int position;
 
     cout << "Enter the ID of the team you would like to remove from the list: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     for (int i = position; i < t_index - 1; i++)
@@ -481,7 +500,7 @@ void updateTeamName(TEAM* teams)
     int position;
 
     cout << "Enter the ID of the team you would like to edit: ";
-    cin >> position;
+    position = readInt();;
     position -= 1;
 
     cin.ignore();
@@ -494,7 +513,7 @@ void updateTeamDescription(TEAM* teams)
     int position;
 
     cout << "Enter the ID of the team you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cin.ignore();
@@ -508,7 +527,7 @@ void updateTeamStatus(TEAM* teams)
     int position;
 
     cout << "Enter the ID of the team you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     int choice;
@@ -518,13 +537,13 @@ void updateTeamStatus(TEAM* teams)
     cout << "3. Not archived" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readInt();
 
     while (choice > 3 or choice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 3! Please, try again: ";
-        cin >> choice;
+        choice = readInt();
     }
 
     if (choice == 1)
@@ -540,13 +559,13 @@ void addStudentToTeam(STUDENT* students, TEAM* teams)
     int position;
 
     cout << "Enter the ID of the team you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
     cout << endl;
 
     int id;
     cout << "Enter the ID number of the student you want to be added to the selected team: ";
-    cin >> id;
+    id = readInt();
 
     teams[position].teammates[teams[position].numOfStudents] = students[id - 1];
     teams[position].numOfStudents++;
@@ -557,13 +576,13 @@ void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 {
     int position;
     cout << "Enter the ID of the team you would like to edit: ";
-    cin >> position;
+    position = readInt();;
     position -= 1;
     cout << endl;
 
     int id;
     cout << "Enter the ID number of the student you want to be removed from the selected team: ";
-    cin >> id;
+    id = readInt();
     id -= 1;
 
     int numberOfMembers = teams[position].numOfStudents;
@@ -614,13 +633,13 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
     cout << "2. Not active" << endl;
     cout << "3. Not archived" << endl<<endl;
     cout << "Enter your choice: ";
-    cin >> choice;
+    choice = readInt();
 
     while (choice > 3 or choice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 3! Please, try again: ";
-        cin >> choice;
+        choice = readInt();
     }
 
     cout << endl;
@@ -648,13 +667,13 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
 {
     int number;
     cout << "Enter teams with how many teammates you want to see (2-4): ";
-    cin >> number;
+    number = readInt();
 
     while (number > 4 or number < 2)
     {
         cout << endl;
         cout << "The number you enter has to be between 2 and 4! Please, try again: ";
-        cin >> number;
+        number = readInt();
     }
 
     cout << endl;
@@ -733,7 +752,7 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
     cin >> teachers[tch_index].email;
 
     cout << "Number of teams they assist: ";
-    cin >> number;
+    number = readInt();
 
     teachers[tch_index].numOfTeams = number;
 
@@ -741,7 +760,7 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
     for (int i = 0; i < number; i++)
     {
         cout << " " << i + 1 << ". ";
-        cin >> id;
+        id = readInt();
         teachers[tch_index].teams[i] = teams[id - 1];
     }
 
@@ -753,7 +772,7 @@ void deleteTeacher(TEACHER* teachers, int& tch_index)
     int position;
 
     cout << "Enter the ID of the teacher you would like to remove from the list: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     for (int i = position; i < tch_index - 1; i++)
@@ -769,7 +788,7 @@ void updateTeacherName(TEACHER* teachers)
     int position;
 
     cout << "Enter the ID of the teacher you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << "Edit the name of the selected teacher:" << endl;
@@ -784,7 +803,7 @@ void updateTeacherEmail(TEACHER* teachers)
     int position;
 
     cout << "Enter the ID of the teacher you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << " New E-mail: ";
@@ -796,14 +815,14 @@ void addTeamToTeacher(TEAM* teams, TEACHER* teachers)
     int position;
 
     cout << "Enter the ID of the teacher you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << endl;
 
     int id;
     cout << "Enter the ID of the team you want to be assisted by the selected teacher: ";
-    cin >> id;
+    id = readInt();
 
     teachers[position].teams[teachers[position].numOfTeams] = teams[id - 1];
     teachers[position].numOfTeams++;
@@ -815,14 +834,14 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
     int position;
 
     cout << "Enter the ID of the teacher you would like to edit: ";
-    cin >> position;
+    position = readInt();
     position -= 1;
 
     cout << endl;
 
     int id;
     cout << "Enter the ID of the team you want to not be assisted by the selected teacher anymore: ";
-    cin >> id;
+    id = readInt();
     id -= 1;
 
     int numberOfTeams = teachers[position].numOfTeams;
@@ -894,13 +913,13 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 
     
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -937,13 +956,13 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
     cout << "5) Return back to Students Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -980,13 +999,13 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
     cout << "5) Return back to Teams Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -1023,13 +1042,13 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
     cout << "6) Return back to Teams Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 6 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 6! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -1068,13 +1087,13 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     cout << "3) Return back to Teachers Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 3 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 3! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -1104,13 +1123,13 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
     cout << "5) Return back to Teachers Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();;
     }
 
     system("cls");
@@ -1151,13 +1170,13 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     cout << "6) Return back to the Main Menu" << endl << endl;
     
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 6 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 6! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -1200,13 +1219,13 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
     cout << "6) Return back to the Main Menu" << endl << endl;
 
     cout << "Enter your choice: ";
-    cin >> userChoice;
+    userChoice = readInt();
 
     while (userChoice > 6 or userChoice < 1)
     {
         cout << endl;
         cout << "The number you enter has to be between 1 and 6! Please, try again: ";
-        cin >> userChoice;
+        userChoice = readInt();
     }
 
     system("cls");
@@ -1249,13 +1268,13 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
         cout << "6) Return back to the Main Menu" << endl << endl;
 
         cout << "Enter your choice: ";
-        cin >> userChoice;
+        userChoice = readInt();
 
         while (userChoice > 6 or userChoice < 1)
         {
             cout << endl;
             cout << "The number you enter has to be between 1 and 6! Please, try again: ";
-            cin >> userChoice;
+            userChoice = readInt();
         }
 
         system("cls");
@@ -1302,13 +1321,13 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
         cout << "5) Exit" << endl << endl;
 
         cout << "Enter your choice: ";
-        cin >> userChoice;
+        userChoice = readInt();
 
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
             cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-            cin >> userChoice;
+            userChoice = readInt();
         }
 
         system("cls");
