@@ -1,5 +1,7 @@
 <img src="https://user-images.githubusercontent.com/59692676/111363586-e9c3b400-8698-11eb-9064-3e8090791e3a.png" width="160">
 
+# Hi, we are team codebenders
+
 ## Our Team
 
 - Svetlana Boyadzhieva - Scrum Trainer
