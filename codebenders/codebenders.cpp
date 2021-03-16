@@ -13,12 +13,19 @@ using namespace std;
 #define PURPLE  "\033[1;95m"
 #define GRAY    "\033[1;90m" 
 #define MINT    "\033[1;96m"
-#define PURPLE "\033[1;35m"
-
 
 #define WHITE   "\033[4;37m"
 #define BWhite  "\033[1;37m"  
 #define UWhite  "\033[4;37m"  
+
+#define BBlack  "\033[1;30m"    
+#define BRed    "\033[1;31m"         
+#define BGreen  "\033[1;32m"       
+#define BYellow "\033[1;33m"      
+#define BBlue   "\033[1;34m"       
+#define BPurple "\033[1;35m"      
+#define BCyan   "\033[1;36m"       
+#define BWhite  "\033[1;37m"       
 
 
 enum role
@@ -346,10 +353,10 @@ void searchStudentsByRole(STUDENT* students, int& index)
     role option;
 
     cout << YELLOW << "Students in which role would you like to see?" << RESET << endl;
-    cout << "1. Scrum Trainer" << endl;
-    cout << "2. QA Engineer" << endl;
-    cout << "3. Backend Developer" << endl;
-    cout << "4. Frontend Developer" << endl<<endl;
+    cout << GREEN << "1." << RESET << " Scrum Trainer" << endl;
+    cout << BLUE << "2." << RESET << " QA Engineer" << endl;
+    cout << CYAN << "3." << RESET << " Backend Developer" << endl;
+    cout << PURPLE << "4." << RESET << "Frontend Developer" << endl << endl;
     cout << "Enter your choice: ";
     choice = readInt();
 
@@ -456,14 +463,14 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
 
     cin.ignore();
 
-    cout << "Name of the team: ";
+    cout << YELLOW << "Name of the team: " << RESET;
     getline(cin, teams[t_index].name);
     
-    cout << "Description: ";
+    cout << GREEN << "Description: " << RESET;
     getline(cin, teams[t_index].description);
     
-    cout << "Date of set up: " << endl;
-    cout << " Day: ";
+    cout << BLUE << "Date of set up: " << RESET << endl;
+    cout << CYAN << " Day: " << RESET;
     teams[t_index].dateOfSetUp.day = readInt();
     cout << " Month: ";
     teams[t_index].dateOfSetUp.month = readInt();
@@ -525,7 +532,7 @@ void updateTeamDescription(TEAM* teams)
 
     cin.ignore();
 
-    cout << " New team description: ";
+    cout << GREEN << " New team description: " << RESET;;
     getline(cin, teams[position].description);
 }
 
@@ -538,10 +545,10 @@ void updateTeamStatus(TEAM* teams)
     position -= 1;
 
     int choice;
-    cout << "Edit the status of the selected team (choose from the options listed below): " << endl;
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl << endl;
+    cout << GRAY<<"Edit the status of the selected team (choose from the options listed below): "<<RESET << endl;
+    cout << GREEN << "1." << RESET << " In use" << endl;
+    cout << RED << "2." << RESET << " Not active" << endl;
+    cout << GRAY << "3." << RESET << " Not archived" << endl << endl;
 
     cout << "Enter your choice: ";
     choice = readInt();
@@ -636,9 +643,10 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
     status option;
 
     cout << GREEN << "Teams with what status would you like to see?" << RESET << endl;
-    cout << "1. In use" << endl;
-    cout << "2. Not active" << endl;
-    cout << "3. Not archived" << endl<<endl;
+    cout << GREEN << "1." << RESET << " In use" << endl;
+    cout << RED << "2." << RESET << " Not active" << endl;
+    cout << GRAY << "3." << RESET << " Not archived" << endl << endl;
+
     cout << "Enter your choice: ";
     choice = readInt();
 
@@ -720,6 +728,7 @@ void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
     tch_index = 2;
 }
 
+//BANAN
 void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int numOfTeams = teachers[tch_index].numOfTeams;
@@ -749,16 +758,16 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 
     cout << CYAN << "Enter info about teacher:" << RESET << endl;
 
-    cout << "First name: ";
+    cout << PURPLE << " First name: " << RESET;;
     cin >> teachers[tch_index].name;
 
-    cout << "Last name: ";
+    cout << YELLOW << " Last name: " << RESET;
     cin >> teachers[tch_index].surname;
 
-    cout << "E-mail: ";
+    cout << BLUE << " E-mail: " << RESET;
     cin >> teachers[tch_index].email;
 
-    cout << "Number of teams they assist: ";
+    cout << GREEN << " Number of teams they assist: " << RESET;
     number = readInt();
 
     teachers[tch_index].numOfTeams = number;
@@ -798,10 +807,10 @@ void updateTeacherName(TEACHER* teachers)
     position = readInt();
     position -= 1;
 
-    cout << "Edit the name of the selected teacher:" << endl;
-    cout << " First name: ";
+    cout << GRAY << "Edit the name of the selected teacher:" << RESET << endl;
+    cout << PURPLE << " First name: " << RESET;
     cin >> teachers[position].name;
-    cout << " Last name: ";
+    cout << YELLOW << " Last name: " << RESET;
     cin >> teachers[position].surname;
 }
 
@@ -873,9 +882,9 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     string name, surname;
     cout << CYAN << "Enter the first and last name of the teacher you are looking for: " << RESET << endl;
-    cout << "First name: ";
+    cout << PURPLE << "First name: " << RESET;
     cin >> name;
-    cout << "Last name: ";
+    cout << YELLOW << "Last name: " << RESET;
     cin >> surname;
 
     cout << endl;
@@ -1260,6 +1269,7 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     {
         int userChoice = 0;
 
+        //CHERESHA
         cout << endl;
         cout << YELLOW<<"STUDENTS" <<RESET<< endl << endl;
         cout << "1) Show a list of all the students" << endl;
@@ -1317,15 +1327,19 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
     while (cont == true)
     {
         int userChoice = 0;
-
-        cout << endl;
-        cout << GREEN<<"TEAMS" <<RESET<< endl << endl;
-        cout << "1) Show a list of all the teams" << endl;
-        cout << "2) Add a new team" << endl;
-        cout << "3) Delete a team" << endl;
-        cout << "4) Search a team by criteria" << endl;
-        cout << "5) Update info about a team" << endl;
-        cout << "6) Return back to the Main Menu" << endl << endl;
+        //Praskova
+        
+        cout <<GREEN<< "  _____         " << endl;
+        cout << " |_   _|__  __ _ _ __ ___  ___" << endl;
+        cout << "   | |/ _ \\/ _` | '_ ` _ \\/ __|" << endl;
+        cout << "   | |  __/ (_| | | | | | \\__ \\" << endl;
+        cout << "   |_|\\___|\\__,_|_| |_| |_|___/" << RESET << endl << endl;
+        cout <<YELLOW<< "1)"<<RESET<<" Show a list of all the teams" << endl;
+        cout << BLUE << "2)" << RESET << " Add a new team" << endl;
+        cout << RED<<"3)"<<RESET<<" Delete a team" << endl;
+        cout << CYAN << "4)" << RESET << " Search a team by criteria" << endl;
+        cout << PURPLE<<"5)"<<RESET<<" Update info about a team" << endl;
+        cout << GRAY<<"6)"<<RESET<<" Return back to the Main Menu" << endl << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
