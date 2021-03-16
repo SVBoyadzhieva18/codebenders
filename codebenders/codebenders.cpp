@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <stdlib.h>
 using namespace std;
@@ -1428,7 +1428,16 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
     while (userChoice != 5)
     {
         cout << endl;
-        cout << "MAIN MENU" << endl << endl;
+        
+        cout << " __  __       _         __  __                      " << endl;
+        cout << "|  \\/  |     (_)       |  \\/  |                   " << endl;
+        cout << "| \\  / | __ _ _ _ __   | \\  / | ___ _ __  _   _   " << endl;
+        cout << "| |\\/| |/ _` | | '_ \\  | |\\/| |/ _ \\ '_ \\| | | |" << endl;
+        cout << "| |  | | (_| | | | | | | |  | |  __/ | | | |_| |    " << endl;
+        cout << "|_|  |_|\\__,_|_|_| |_| |_|  |_|\\___|_| |_|\\__,_| " << endl;
+  
+        cout << endl;
+        cout << endl;
         cout << "Which sets of data would you like to work with?" << endl << endl;
         cout << "1) Students" << endl;
         cout << "2) Teams" << endl;
