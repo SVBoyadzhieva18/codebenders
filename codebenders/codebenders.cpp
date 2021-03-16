@@ -136,10 +136,10 @@ void initStudents(STUDENT* students, int& index)
 
 void showStudent(STUDENT* students, int index)
 {
-    cout << "  Student ID: " << index + 1 << endl;
-    cout << "  Name: " << students[index].name << " " << students[index].surname << endl;
-    cout << "  Class: " << students[index].schoolYear << " " << students[index].className << endl;
-    cout << "  Role: ";
+    cout << YELLOW << "  Student ID: " << RESET << index + 1 << endl;
+    cout <<PURPLE<< "  Name: " <<RESET<< students[index].name << " " << students[index].surname << endl;
+    cout << CYAN << "  Class: " << RESET << students[index].schoolYear << " " << students[index].className << endl;
+    cout << BLUE "  Role: " << RESET;
     if (students[index].teamRole == 0)
         cout << "Scrum Trainer" << endl;
     else if (students[index].teamRole == 1)
@@ -148,13 +148,13 @@ void showStudent(STUDENT* students, int index)
         cout << "Backend Developer" << endl;
     else
         cout << "Frontend Developer" << endl;
-    cout << "  E-mail: " << students[index].email << endl;
+    cout << GREEN << "  E-mail: " << RESET << UWhite << students[index].email << RESET << endl;
 }
 
 void showStudents(STUDENT* students, int index)
 {
 
-    cout << "List of students: " << endl << endl;
+    cout << YELLOW << "List of students: " << RESET << endl << endl;
     for (int i = 0; i < index; i++)
     {
         showStudent(students, i);
@@ -165,18 +165,20 @@ void showStudents(STUDENT* students, int index)
 void enterStudent(STUDENT* students, int& index)
 {
     int choice;
+    //YAGODA
+    cout << YELLOW << "Enter info about student:" << RESET << endl;
 
-    cout << "Enter info about student:" << endl;
-
-    cout << " First name: ";
+    cout <<PURPLE " First name: "<<RESET;
     cin >> students[index].name;
-    cout << " Last name: ";
+    cout << CYAN " Last name: " << RESET;
     cin >> students[index].surname;
 
-    cout << " Class: " << endl;
-    cout << "School year: ";
+    cout << endl;
+    cout <<GRAY<< " Class: " <<RESET<< endl;
+    
+    cout << BLUE << "  School year: " << RESET;
     students[index].schoolYear = readInt();
-    cout << "Class name: ";
+    cout << GREEN << "  Class name: " << RESET;
     cin >> students[index].className;
 
     cout << " Role in team: " << endl;
@@ -206,7 +208,7 @@ void deleteStudent(STUDENT* students, int& index)
 {
     int position;
 
-    cout << "Enter the ID of the student you would like to remove from the list: ";
+    cout << YELLOW << "Enter the ID of the student you would like to remove from the list: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -222,11 +224,11 @@ void updateStudentName(STUDENT* students)
 {
     int position;
 
-    cout << "Enter the ID of the student you would like to edit: ";
+    cout << YELLOW << "Enter the ID of the student you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
-    cout << "Edit the name of the selected student:" << endl;
+    cout << GRAY << "Edit the name of the selected student:" << RESET << endl;
     cout << " First name: ";
     cin >> students[position].name;
     cout << " Last name: ";
@@ -252,12 +254,12 @@ void updateStudentRole(STUDENT* students)
 {
     int position;
 
-    cout << "Enter the ID of the student you would like to edit: ";
+    cout << YELLOW << "Enter the ID of the student you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
     int choice;
-    cout << "Edit the role of the selected student (choose from the options listed below): " << endl << endl;
+    cout <<GRAY<< "Edit the role of the selected student (choose from the options listed below): " <<RESET<< endl << endl;
 
     cout << " 1. Scrum Trainer" << endl;
     cout << " 2. QA Engineer" << endl;
@@ -288,7 +290,7 @@ void updateStudentEmail(STUDENT* students)
 {
     int position;
 
-    cout << "Enter the ID of the student you would like to edit: ";
+    cout << YELLOW << "Enter the ID of the student you would like to edit: " << RESET;;
     position = readInt();
     position -= 1;
 
@@ -299,7 +301,7 @@ void updateStudentEmail(STUDENT* students)
 void searchStudentByName(STUDENT* students, int& index)
 {
     string name, surname;
-    cout << "Enter the first and last name of the student you are looking for: "<<endl;
+    cout << YELLOW << "Enter the first and last name of the student you are looking for: " << RESET << endl;
     cout << " First name: ";
     cin >> name;
     cout << " Last name: ";
@@ -320,7 +322,7 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
 {
     int schoolYear;
     char className;
-    cout << "Show all the students from this class: "<<endl;
+    cout << YELLOW << "Show all the students from this class: " << RESET << endl;
     cout << " School year: ";
     schoolYear = readInt();
     cout << " Class name: ";
@@ -343,7 +345,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
     int choice;
     role option;
 
-    cout << "Students in which role would you like to see?" << endl;
+    cout << YELLOW << "Students in which role would you like to see?" << RESET << endl;
     cout << "1. Scrum Trainer" << endl;
     cout << "2. QA Engineer" << endl;
     cout << "3. Backend Developer" << endl;
@@ -381,7 +383,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
 
 void searchStudentsWithoutATeam(STUDENT* students, int& index)
 {
-    cout << "Students that haven't joined any team yet: " << endl << endl;
+    cout << YELLOW << "Students that haven't joined any team yet: " << RESET << endl << endl;
 
     for (int i = 0; i < index; i++)
     {
