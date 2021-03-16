@@ -374,7 +374,7 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
 void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 {
     teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive, 3, 1 };
-    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3, 0 };
+    teams[1] = { "We Showed Up", "Hoping for the best with minimum effort!", {13,2,2021}, {students[7], students[9], students[11]}, status::inUse, 3, 1 };
     teams[2] = { "Cereal Killers", "Trying our best", {20, 2, 2021},  {students[0], students[1], students[5]}, status::notArchived, 3, 1 };
 
     t_index = 3;
@@ -677,7 +677,7 @@ void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
     {
         if (teams[i].hasATeacher == false)
         {
-            showTeam(students, teams, t_index);
+            showTeam(students, teams, i);
             cout << endl << endl;
         }
     }
@@ -791,10 +791,18 @@ void updateTeacherEmail(TEACHER* teachers)
     cin >> teachers[position].email;
 }
 
-void addTeamToTeacher(TEAM* teams, TEACHER* teachers, int position)
+void addTeamToTeacher(TEAM* teams, TEACHER* teachers)
 {
+    int position;
+
+    cout << "Enter the ID of the teacher you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
+    cout << endl;
+
     int id;
-    cout << "Enter the ID number of the team you want to be assisted by the selected tacher: ";
+    cout << "Enter the ID of the team you want to be assisted by the selected teacher: ";
     cin >> id;
 
     teachers[position].teams[teachers[position].numOfTeams] = teams[id - 1];
@@ -802,16 +810,37 @@ void addTeamToTeacher(TEAM* teams, TEACHER* teachers, int position)
     teams[id - 1].hasATeacher = true;
 }
 
-void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers, int tch_index, int position)
+void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
 {
-    int numberOfTeams = teachers[tch_index].numOfTeams;
+    int position;
 
-    for (int i = position; i < numberOfTeams - 1; i++)
+    cout << "Enter the ID of the teacher you would like to edit: ";
+    cin >> position;
+    position -= 1;
+
+    cout << endl;
+
+    int id;
+    cout << "Enter the ID of the team you want to not be assisted by the selected teacher anymore: ";
+    cin >> id;
+    id -= 1;
+
+    int numberOfTeams = teachers[position].numOfTeams;
+    int posInTeacher;
+
+    for (int i = 0; i < numberOfTeams; i++)
     {
-        teachers[tch_index].teams[i] = teachers[tch_index].teams[i + 1];
+        if (teachers[position].teams[i].name == teams[id].name)
+            posInTeacher = i;
     }
 
-    teachers[tch_index].numOfTeams--;
+    for (int i = posInTeacher; i < numberOfTeams - 1; i++)
+    {
+        teachers[position].teams[i] = teachers[position].teams[i + 1];
+    }
+
+    teachers[position].numOfTeams--;
+    teams[id].hasATeacher = false;
 }
 
 void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
@@ -1070,15 +1099,17 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
     cout << "What would you like to update?" << endl << endl;
     cout << "1) Name" << endl;
     cout << "2) Email" << endl;
-    cout << "3) Return back to Teachers Menu" << endl << endl;
+    cout << "3) Assign a team to a teacher" << endl;
+    cout << "4) Remove a team from a teacher" << endl;
+    cout << "5) Return back to Teachers Menu" << endl << endl;
 
     cout << "Enter your choice: ";
     cin >> userChoice;
 
-    while (userChoice > 3 or userChoice < 1)
+    while (userChoice > 5 or userChoice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
         cin >> userChoice;
     }
 
@@ -1093,7 +1124,14 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
         updateTeacherEmail(teachers);
         break;
     case 3:
+        addTeamToTeacher(teams, teachers);
+        break;
+    case 4:
+        removeTeamFromTeacher(teams, teachers);
+        break;
+    case 5:
         displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+        break;
     }
   
 }
