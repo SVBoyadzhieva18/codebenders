@@ -97,7 +97,7 @@ int readInt()
         cin.clear();
         cin.ignore(INT_MAX, '\n');
         cout << endl;
-        cout << "You have to enter a number. Please, try again: ";
+        cout << RED << "You have to enter a number. Please, try again: "<<RESET;
     }
 
     return number;
@@ -186,7 +186,7 @@ void enterStudent(STUDENT* students, int& index)
     while (choice > 4 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cout << RED << "The number you enter has to be between 1 and 4! Please, try again: "<<RESET;
         choice = readInt();
     }
 
@@ -266,7 +266,7 @@ void updateStudentRole(STUDENT* students)
     while (choice > 4 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cout << RED << "The number you enter has to be between 1 and 4! Please, try again: " << RESET;
         choice = readInt();
     }
 
@@ -350,7 +350,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
     while (choice > 4 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 4! Please, try again: ";
+        cout << RED << "The number you enter has to be between 1 and 4! Please, try again: " << RESET;
         choice = readInt();
     }
 
@@ -543,7 +543,7 @@ void updateTeamStatus(TEAM* teams)
     while (choice > 3 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        cout << RED << "The number you enter has to be between 1 and 3! Please, try again: " << RESET;
         choice = readInt();
     }
 
@@ -639,7 +639,7 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
     while (choice > 3 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        cout << RED << "The number you enter has to be between 1 and 3! Please, try again: " << RESET;
         choice = readInt();
     }
 
@@ -673,7 +673,7 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
     while (number > 4 or number < 2)
     {
         cout << endl;
-        cout << "The number you enter has to be between 2 and 4! Please, try again: ";
+        cout << RED << "The number you enter has to be between 2 and 4! Please, try again: " << RESET;
         number = readInt();
     }
 
@@ -915,7 +915,7 @@ bool returnBack()
     while (choice > 2 or choice < 1)
     {
         cout << endl;
-        cout << "The number you enter has to be either 1 or 2! Please, try again: ";
+        cout << RED << "The number you enter has to be either 1 or 2! Please, try again: " RESET;
         choice = readInt();
     }
 
@@ -951,7 +951,7 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1004,7 +1004,7 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1057,7 +1057,7 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " RESET;
             userChoice = readInt();
         }
 
@@ -1110,7 +1110,7 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
         while (userChoice > 6 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 6! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1165,7 +1165,7 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
         while (userChoice > 3 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 3! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1210,7 +1210,7 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " RESET;
             userChoice = readInt();;
         }
 
@@ -1268,7 +1268,7 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
         while (userChoice > 6 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 6! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1326,7 +1326,7 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
         while (userChoice > 6 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 6! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1384,7 +1384,7 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
         while (userChoice > 6 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 6! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
@@ -1442,7 +1442,7 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
         while (userChoice > 5 or userChoice < 1)
         {
             cout << endl;
-            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " << RESET;
             userChoice = readInt();
         }
 
