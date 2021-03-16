@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 using namespace std;
 
 #define RESET   "\033[0m"
@@ -896,264 +897,346 @@ void spaces(int count)
 
 void greetings()
 {
-    cout << "Hello from us, the codebenders and welcome to out program!" << endl;
+    cout << "Hello from us, the codebenders, and welcome to our program!" << endl;
+}
+
+bool returnBack()
+{
+    int choice;
+
+    cout << endl;
+    cout << "What would you like to do now?" << endl << endl;
+    cout << "1) Stay here" << endl;
+    cout << "2) Go one menu back" << endl << endl;
+    cout << "Enter your choice: ";
+
+    choice = readInt();
+
+    while (choice > 2 or choice < 1)
+    {
+        cout << endl;
+        cout << "The number you enter has to be either 1 or 2! Please, try again: ";
+        choice = readInt();
+    }
+
+    cout << endl;
+
+    system("cls");
+
+    if (choice == 1)
+        return true;
+    
+    return false;
 }
 
 
 void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "By what criteria do you want to search for a student/-s?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Class" << endl;
-    cout << "3) Role" << endl;
-    cout << "4) Without a team" << endl;
-    cout << "5) Return back to Students Menu" << endl << endl;
-
-    
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 5 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+        int userChoice;
+
+        cout << "By what criteria do you want to search for a student/-s?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Class" << endl;
+        cout << "3) Role" << endl;
+        cout << "4) Without a team" << endl;
+        cout << "5) Return back to Students Menu" << endl << endl;
+
+
+        cout << "Enter your choice: ";
         userChoice = readInt();
-    }
 
-    system("cls");
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            userChoice = readInt();
+        }
 
-    switch (userChoice)
-    {
-    case 1:
-        searchStudentByName(students, st_index);
-        break;
-    case 2:
-        seacrhStudentsByClass(students, st_index);
-        break;
-    case 3:
-        searchStudentsByRole(students, st_index);
-        break;
-    case 4:
-        searchStudentsWithoutATeam(students, st_index);
-        break;
-    case 5:
-        displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            searchStudentByName(students, st_index);
+            cont = returnBack();
+            break;
+        case 2:
+            seacrhStudentsByClass(students, st_index);
+            cont = returnBack();
+            break;
+        case 3:
+            searchStudentsByRole(students, st_index);
+            cont = returnBack();
+            break;
+        case 4:
+            searchStudentsWithoutATeam(students, st_index);
+            cont = returnBack();
+            break;
+        case 5:
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
-    
 }
 
 void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "What would you like to update?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Class" << endl;
-    cout << "3) Email" << endl;
-    cout << "4) Team role" << endl;
-    cout << "5) Return back to Students Menu" << endl << endl;
-
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 5 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+        int userChoice;
+
+        cout << "What would you like to update?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Class" << endl;
+        cout << "3) Email" << endl;
+        cout << "4) Team role" << endl;
+        cout << "5) Return back to Students Menu" << endl << endl;
+
+        cout << "Enter your choice: ";
         userChoice = readInt();
-    }
 
-    system("cls");
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            userChoice = readInt();
+        }
 
-    switch (userChoice)
-    {
-    case 1:
-        updateStudentName(students);
-        break;
-    case 2:
-        updateStudentClass(students);
-        break;
-    case 3:
-        updateStudentEmail(students);
-        break;
-    case 4:
-        updateStudentRole(students);
-        break;
-    case 5:
-        displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            updateStudentName(students);
+            cont = returnBack();
+            break;
+        case 2:
+            updateStudentClass(students);
+            cont = returnBack();
+            break;
+        case 3:
+            updateStudentEmail(students);
+            cont = returnBack();
+            break;
+        case 4:
+            updateStudentRole(students);
+            cont = returnBack();
+            break;
+        case 5:
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
-    
 }
 
 void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "By what criteria do you want to search for a team/-s?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Number of members" << endl;
-    cout << "3) Status" << endl;
-    cout << "4) Teams which don't have a teacher" << endl;
-    cout << "5) Return back to Teams Menu" << endl << endl;
-
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 5 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+        int userChoice;
+
+        cout << "By what criteria do you want to search for a team/-s?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Number of members" << endl;
+        cout << "3) Status" << endl;
+        cout << "4) Teams which don't have a teacher" << endl;
+        cout << "5) Return back to Teams Menu" << endl << endl;
+
+        cout << "Enter your choice: ";
         userChoice = readInt();
-    }
 
-    system("cls");
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            userChoice = readInt();
+        }
 
-    switch (userChoice)
-    {
-    case 1:
-        searchTeamByName(students, teams, t_index);
-        break;
-    case 2:
-        searchTeamByNumberOfMembers(students, teams, t_index);
-        break;
-    case 3:
-        searchTeamByStatus(students, teams, t_index);
-    case 4:
-        searchTeamsWithoutATeacher(students, teams, t_index);
-        break;
-    case 5:
-        displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
-        break;
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            searchTeamByName(students, teams, t_index);
+            cont = returnBack();
+            break;
+        case 2:
+            searchTeamByNumberOfMembers(students, teams, t_index);
+            cont = returnBack();
+            break;
+        case 3:
+            searchTeamByStatus(students, teams, t_index);
+            cont = returnBack();
+        case 4:
+            searchTeamsWithoutATeacher(students, teams, t_index);
+            cont = returnBack();
+            break;
+        case 5:
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
 }
 
 void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "What would you like to update?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Description" << endl;
-    cout << "3) Status" << endl;
-    cout << "4) Add a new member to a team" << endl;
-    cout << "5) Remove a student from a team" << endl;
-    cout << "6) Return back to Teams Menu" << endl << endl;
-
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 6 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+        int userChoice;
+
+        cout << "What would you like to update?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Description" << endl;
+        cout << "3) Status" << endl;
+        cout << "4) Add a new member to a team" << endl;
+        cout << "5) Remove a student from a team" << endl;
+        cout << "6) Return back to Teams Menu" << endl << endl;
+
+        cout << "Enter your choice: ";
         userChoice = readInt();
-    }
 
-    system("cls");
+        while (userChoice > 6 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 6! Please, try again: ";
+            userChoice = readInt();
+        }
 
-    switch (userChoice)
-    {
-    case 1:
-        updateTeamName(teams);
-        break;
-    case 2:
-        updateTeamDescription(teams);
-        break;
-    case 3:
-        updateTeamStatus(teams);
-        break;
-    case 4:
-        addStudentToTeam(students, teams);
-        break;
-    case 5:
-        removeStudentFromTeam(students, teams);
-        break;
-    case 6:
-        displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
-        break;
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            updateTeamName(teams);
+            cont = returnBack();
+            break;
+        case 2:
+            updateTeamDescription(teams);
+            cont = returnBack();
+            break;
+        case 3:
+            updateTeamStatus(teams);
+            cont = returnBack();
+            break;
+        case 4:
+            addStudentToTeam(students, teams);
+            cont = returnBack();
+            break;
+        case 5:
+            removeStudentFromTeam(students, teams);
+            cont = returnBack();
+            break;
+        case 6:
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
- 
 }
 
 void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "By what criteria do you want to search for a teacher/-s?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Team" << endl;
-    cout << "3) Return back to Teachers Menu" << endl << endl;
-
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 3 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+        int userChoice;
+
+        cout << "By what criteria do you want to search for a teacher/-s?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Team" << endl;
+        cout << "3) Return back to Teachers Menu" << endl << endl;
+
+        cout << "Enter your choice: ";
         userChoice = readInt();
-    }
 
-    system("cls");
+        while (userChoice > 3 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 3! Please, try again: ";
+            userChoice = readInt();
+        }
 
-    switch (userChoice)
-    {
-    case 1:
-        searchTeacherByName(teams, teachers, tch_index);
-        break;
-    case 2:
+        system("cls");
 
-        break;
-    case 3:
-        displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+        switch (userChoice)
+        {
+        case 1:
+            searchTeacherByName(teams, teachers, tch_index);
+            cont = returnBack();
+            break;
+        case 2:
+
+            break;
+        case 3:
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
 }
 
 void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
 {
-    int userChoice;
-
-    cout << "What would you like to update?" << endl << endl;
-    cout << "1) Name" << endl;
-    cout << "2) Email" << endl;
-    cout << "3) Assign a team to a teacher" << endl;
-    cout << "4) Remove a team from a teacher" << endl;
-    cout << "5) Return back to Teachers Menu" << endl << endl;
-
-    cout << "Enter your choice: ";
-    userChoice = readInt();
-
-    while (userChoice > 5 or userChoice < 1)
+    bool cont = true;
+    while (cont == true)
     {
-        cout << endl;
-        cout << "The number you enter has to be between 1 and 5! Please, try again: ";
-        userChoice = readInt();;
-    }
+        int userChoice;
 
-    system("cls");
-  
-    switch (userChoice)
-    {
-    case 1:
-        updateTeacherName(teachers);
-        break;
-    case 2:
-        updateTeacherEmail(teachers);
-        break;
-    case 3:
-        addTeamToTeacher(teams, teachers);
-        break;
-    case 4:
-        removeTeamFromTeacher(teams, teachers);
-        break;
-    case 5:
-        displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
-        break;
+        cout << "What would you like to update?" << endl << endl;
+        cout << "1) Name" << endl;
+        cout << "2) Email" << endl;
+        cout << "3) Assign a team to a teacher" << endl;
+        cout << "4) Remove a team from a teacher" << endl;
+        cout << "5) Return back to Teachers Menu" << endl << endl;
+
+        cout << "Enter your choice: ";
+        userChoice = readInt();
+
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << "The number you enter has to be between 1 and 5! Please, try again: ";
+            userChoice = readInt();;
+        }
+
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            updateTeacherName(teachers);
+            cont = returnBack();
+            break;
+        case 2:
+            updateTeacherEmail(teachers);
+            cont = returnBack();
+            break;
+        case 3:
+            addTeamToTeacher(teams, teachers);
+            cont = returnBack();
+            break;
+        case 4:
+            removeTeamFromTeacher(teams, teachers);
+            cont = returnBack();
+            break;
+        case 5:
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+            cont = false;
+            break;
+        }
     }
-  
 }
+
+
 
 
 void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
@@ -1360,9 +1443,7 @@ int main()
     TEAM teams[30];
     TEACHER teachers[30];
 
-    int st_index = 0;
-    int t_index = 0;
-    int tch_index = 0;
+    int st_index = 0, t_index = 0, tch_index = 0;
 
     initStudents(students, st_index);
     initTeams(students, st_index, teams, t_index);
@@ -1370,26 +1451,4 @@ int main()
 
     greetings();
     displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
-
-    /*greetings();
-    cout << mainMenu();
-    initStudents(students, st_index);
-    showStudents(students, st_index);
-    enterStudent(students, st_index);
-    deleteStudent(students, st_index, 4);
-    showStudents(students, st_index);
-    */
-
-    /*initStudents(students, st_index);
-    initTeams(students, st_index, teams, t_index);*/
-
-    /*showTeams(students, teams, t_index, 3);
-    deleteTeam(teams, t_index, 0);
-    showTeams(students, teams, t_index, 3);*/
-
-    /*initTeachers(teams, teachers, tch_index);
-    showTeachers(teams, teachers, tch_index);
-    enterTeacher(teams, teachers, tch_index);
-    deleteTeacher(teachers, tch_index, 0);
-    showTeachers(teams, teachers, tch_index);*/
 }
