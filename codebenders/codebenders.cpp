@@ -8,9 +8,13 @@ using namespace std;
 #define RED     "\033[1;91m" 
 #define YELLOW  "\033[1;93m"  
 #define GREEN   "\033[1;92m"
-#define CYAN    "\033[0;36m"
-#define BLUE    "\033[1;96m"
+#define BLUE    "\033[0;36m"
+#define CYAN    "\033[1;96m"
 #define PURPLE  "\033[1;95m"
+#define GRAY    "\033[1;90m" 
+#define MINT    "\033[1;96m"
+#define PURPLE "\033[1;35m"
+
 
 #define WHITE   "\033[4;37m"
 #define BWhite  "\033[1;37m"  
@@ -402,12 +406,12 @@ void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 
 void showTeam(STUDENT* students, TEAM* teams, int& t_index)
 {
-    cout << "ID: " << t_index + 1<<endl;
-    cout << "Name: " << teams[t_index].name << endl;
-    cout << "Description: " << teams[t_index].description << endl;
-    cout << "Date of set-up: " << teams[t_index].dateOfSetUp.day << "/"
-        << teams[t_index].dateOfSetUp.month << "/" << teams[t_index].dateOfSetUp.year << endl;
-    cout << "Teammates: " << endl;
+    cout << CYAN << "ID: " << RESET << t_index + 1 << endl;
+    cout << BLUE << "Name: " << RESET << teams[t_index].name << endl;
+    cout << PURPLE << "Description: " << RESET << teams[t_index].description << endl;
+    cout << YELLOW << "Date of set-up: " << RESET << UWhite << teams[t_index].dateOfSetUp.day << "/"
+        << teams[t_index].dateOfSetUp.month << "/" << teams[t_index].dateOfSetUp.year<<RESET << endl;
+    cout << GREEN << "Teammates: " << RESET << endl;
 
     for (int i = 0; i < teams[t_index].numOfStudents; i++)
     {
@@ -423,18 +427,18 @@ void showTeam(STUDENT* students, TEAM* teams, int& t_index)
             cout << "Frontend Developer" << endl;
     }
 
-    cout << "Status: ";
+    cout << GRAY << "Status: " << RESET;
     if (teams[t_index].teamStatus == 0)
-        cout << "In use";
+        cout << GREEN << "In use" << RESET;
     else if (teams[t_index].teamStatus == 1)
-        cout << "Not active";
+        cout << RED << "Not active" << RESET;
     else
-        cout << "Not archived";
+        cout << GRAY << "Not archived" << RESET;
 }
 
 void showTeams(STUDENT* students, TEAM* teams, int& t_index)
 {
-    cout << "List of teams: " << endl << endl;
+    cout << GREEN << "List of teams: " << RESET << endl << endl;
     for (int i = 0; i < t_index; i++)
     {
         showTeam(students, teams, i);
@@ -446,7 +450,7 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
 {
     int number, id;
 
-    cout << "Enter info about a new team:" << endl;
+    cout <<GREEN<< "Enter info about a new team:" <<RESET<< endl;
 
     cin.ignore();
 
@@ -469,7 +473,7 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
 
     teams[t_index].numOfStudents = number;
 
-    cout << "Enter the ID numbers of the members of the team: " << endl;
+    cout << GREEN << "Enter the ID numbers of the members of the team: " << RESET << endl;
     for (int i = 0; i < number; i++)
     {
         cout << " " << i + 1 << ". ";
@@ -484,7 +488,7 @@ void deleteTeam(TEAM* teams, int& t_index)
 {
     int position;
 
-    cout << "Enter the ID of the team you would like to remove from the list: ";
+    cout << GREEN << "Enter the ID of the team you would like to remove from the list: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -500,12 +504,12 @@ void updateTeamName(TEAM* teams)
 {
     int position;
 
-    cout << "Enter the ID of the team you would like to edit: ";
+    cout << GREEN << "Enter the ID of the team you would like to edit: " << RESET;
     position = readInt();;
     position -= 1;
 
     cin.ignore();
-    cout << " New team name: ";
+    cout << GREEN << " New team name: " << RESET;
     getline(cin, teams[position].name);
 }
 
@@ -513,7 +517,7 @@ void updateTeamDescription(TEAM* teams)
 {
     int position;
 
-    cout << "Enter the ID of the team you would like to edit: ";
+    cout << GREEN << "Enter the ID of the team you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -527,7 +531,7 @@ void updateTeamStatus(TEAM* teams)
 {
     int position;
 
-    cout << "Enter the ID of the team you would like to edit: ";
+    cout << GREEN << "Enter the ID of the team you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -559,13 +563,13 @@ void addStudentToTeam(STUDENT* students, TEAM* teams)
 {
     int position;
 
-    cout << "Enter the ID of the team you would like to edit: ";
+    cout << GREEN << "Enter the ID of the team you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
     cout << endl;
 
     int id;
-    cout << "Enter the ID number of the student you want to be added to the selected team: ";
+    cout << GREEN << "Enter the ID number of the student you want to be added to the selected team: " << RESET;
     id = readInt();
 
     teams[position].teammates[teams[position].numOfStudents] = students[id - 1];
@@ -576,13 +580,13 @@ void addStudentToTeam(STUDENT* students, TEAM* teams)
 void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 {
     int position;
-    cout << "Enter the ID of the team you would like to edit: ";
+    cout << GREEN << "Enter the ID of the team you would like to edit: " << RESET;
     position = readInt();;
     position -= 1;
     cout << endl;
 
     int id;
-    cout << "Enter the ID number of the student you want to be removed from the selected team: ";
+    cout << GREEN << "Enter the ID number of the student you want to be removed from the selected team: " << RESET;
     id = readInt();
     id -= 1;
 
@@ -607,7 +611,7 @@ void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
 {
     string name;
-    cout << "Enter the name of the team you are looking for: ";
+    cout << GREEN << "Enter the name of the team you are looking for: " << RESET;
     cin >> name;
 
     cout << endl;
@@ -629,7 +633,7 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
     int choice;
     status option;
 
-    cout << "Teams with what status would you like to see?" << endl;
+    cout << GREEN << "Teams with what status would you like to see?" << RESET << endl;
     cout << "1. In use" << endl;
     cout << "2. Not active" << endl;
     cout << "3. Not archived" << endl<<endl;
@@ -667,7 +671,7 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
 void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
 {
     int number;
-    cout << "Enter teams with how many teammates you want to see (2-4): ";
+    cout << GREEN << "Enter teams with how many teammates you want to see (2-4): " << RESET;
     number = readInt();
 
     while (number > 4 or number < 2)
@@ -691,7 +695,7 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
 
 void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
 {
-    cout << "Teams that haven't got any teacher yet: " << endl << endl;
+    cout << GREEN << "Teams that haven't got any teacher yet: " << RESET << endl << endl;
 
     for (int i = 0; i < t_index; i++)
     {
@@ -729,7 +733,7 @@ void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 
 void showTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
-    cout << "List of teachers: " << endl << endl;
+    cout <<CYAN<< "List of teachers: " << RESET<<endl << endl;
     for (int i = 0; i < tch_index; i++)
     {
         showTeacher(teams, teachers, i);
@@ -741,7 +745,7 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int number, id;
 
-    cout << "Enter info about teacher:" << endl;
+    cout << CYAN << "Enter info about teacher:" << RESET << endl;
 
     cout << "First name: ";
     cin >> teachers[tch_index].name;
@@ -757,7 +761,7 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 
     teachers[tch_index].numOfTeams = number;
 
-    cout << "Enter the IDs of the teams they assist:" << endl;
+    cout << GREEN << "Enter the IDs of the teams they assist:" << RESET << endl;
     for (int i = 0; i < number; i++)
     {
         cout << " " << i + 1 << ". ";
@@ -772,7 +776,7 @@ void deleteTeacher(TEACHER* teachers, int& tch_index)
 {
     int position;
 
-    cout << "Enter the ID of the teacher you would like to remove from the list: ";
+    cout << CYAN << "Enter the ID of the teacher you would like to remove from the list: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -788,7 +792,7 @@ void updateTeacherName(TEACHER* teachers)
 {
     int position;
 
-    cout << "Enter the ID of the teacher you would like to edit: ";
+    cout << CYAN << "Enter the ID of the teacher you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -803,7 +807,7 @@ void updateTeacherEmail(TEACHER* teachers)
 {
     int position;
 
-    cout << "Enter the ID of the teacher you would like to edit: ";
+    cout << CYAN << "Enter the ID of the teacher you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
@@ -815,14 +819,14 @@ void addTeamToTeacher(TEAM* teams, TEACHER* teachers)
 {
     int position;
 
-    cout << "Enter the ID of the teacher you would like to edit: ";
+    cout <<CYAN<< "Enter the ID of the teacher you would like to edit: "<<RESET;
     position = readInt();
     position -= 1;
 
     cout << endl;
 
     int id;
-    cout << "Enter the ID of the team you want to be assisted by the selected teacher: ";
+    cout << CYAN << "Enter the ID of the team you want to be assisted by the selected teacher: " << RESET;
     id = readInt();
 
     teachers[position].teams[teachers[position].numOfTeams] = teams[id - 1];
@@ -834,14 +838,14 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
 {
     int position;
 
-    cout << "Enter the ID of the teacher you would like to edit: ";
+    cout << CYAN << "Enter the ID of the teacher you would like to edit: " << RESET;
     position = readInt();
     position -= 1;
 
     cout << endl;
 
     int id;
-    cout << "Enter the ID of the team you want to not be assisted by the selected teacher anymore: ";
+    cout << CYAN << "Enter the ID of the team you want to not be assisted by the selected teacher anymore: " << RESET;
     id = readInt();
     id -= 1;
 
@@ -866,7 +870,7 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
 void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     string name, surname;
-    cout << "Enter the first and last name of the teacher you are looking for: " << endl;
+    cout << CYAN << "Enter the first and last name of the teacher you are looking for: " << RESET << endl;
     cout << "First name: ";
     cin >> name;
     cout << "Last name: ";
@@ -906,8 +910,8 @@ bool returnBack()
 
     cout << endl;
     cout << "What would you like to do now?" << endl << endl;
-    cout << "1) Stay here" << endl;
-    cout << "2) Go one menu back" << endl << endl;
+    cout << GREEN << "1)" << RESET << " Stay here" << endl;
+    cout << GRAY << "2)" << RESET << " Go one menu back" << endl << endl;
     cout << "Enter your choice: ";
 
     choice = readInt();
@@ -937,12 +941,13 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     {
         int userChoice;
 
-        cout << "By what criteria do you want to search for a student/-s?" << endl << endl;
-        cout << "1) Name" << endl;
-        cout << "2) Class" << endl;
-        cout << "3) Role" << endl;
-        cout << "4) Without a team" << endl;
-        cout << "5) Return back to Students Menu" << endl << endl;
+        cout << YELLOW <<"By what criteria do you want to search for a student/-s?" << RESET <<endl << endl;
+
+        cout << GREEN << "1)" << RESET << " Name" << endl;
+        cout << CYAN << "2)" << RESET << " Class" << endl;
+        cout << PURPLE << "3)" << RESET << " Role" << endl;
+        cout << RED << "4)" << RESET << " Without a team" << endl;
+        cout << GRAY << "5)" << RESET << " Return back to Students Menu" << endl << endl;
 
 
         cout << "Enter your choice: ";
@@ -1254,7 +1259,7 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
         int userChoice = 0;
 
         cout << endl;
-        cout << "STUDENTS" << endl << endl;
+        cout << YELLOW<<"STUDENTS" <<RESET<< endl << endl;
         cout << "1) Show a list of all the students" << endl;
         cout << "2) Add a new student" << endl;
         cout << "3) Delete a student" << endl;
@@ -1312,7 +1317,7 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
         int userChoice = 0;
 
         cout << endl;
-        cout << "TEAMS" << endl << endl;
+        cout << GREEN<<"TEAMS" <<RESET<< endl << endl;
         cout << "1) Show a list of all the teams" << endl;
         cout << "2) Add a new team" << endl;
         cout << "3) Delete a team" << endl;
@@ -1368,9 +1373,9 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     while (cont == true)
     {
        int  userChoice = 0;
-
+       
         cout << endl;
-        cout << "TEACHERS" << endl << endl;
+        cout <<CYAN<< "TEACHERS"<< RESET << endl << endl;
         cout << "1) Show a list of all the teachers" << endl;
         cout << "2) Add a new teacher" << endl;
         cout << "3) Delete a teacher" << endl;
@@ -1438,12 +1443,14 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
   
         cout << endl;
         cout << endl;
+
+        //MANDARINA
         cout << "Which sets of data would you like to work with?" << endl << endl;
-        cout << "1) Students" << endl;
-        cout << "2) Teams" << endl;
-        cout << "3) Teachers" << endl;
-        cout << "4) School" << endl;
-        cout << "5) Exit" << endl << endl;
+        cout << YELLOW << "1)" << RESET<<" Students" << endl;
+        cout << GREEN << "2)" << RESET<<" Teams"  << endl;
+        cout << CYAN << "3)"<< RESET<<" Teachers"  << endl;
+        cout << BLUE << "4)" << RESET<<" School"  << endl;
+        cout << PURPLE << "5)"<< RESET<<" Exit" << endl << endl;
 
         cout << "Enter your choice: ";
         userChoice = readInt();
