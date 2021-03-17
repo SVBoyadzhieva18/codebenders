@@ -236,9 +236,9 @@ void updateStudentName(STUDENT* students)
     position -= 1;
 
     cout << GRAY << "Edit the name of the selected student:" << RESET << endl;
-    cout << " First name: ";
+    cout << PURPLE << " First name: " << RESET;
     cin >> students[position].name;
-    cout << " Last name: ";
+    cout << CYAN << " Last name: " <<RESET<< endl;
     cin >> students[position].surname;
 }
 
@@ -309,9 +309,9 @@ void searchStudentByName(STUDENT* students, int& index)
 {
     string name, surname;
     cout << YELLOW << "Enter the first and last name of the student you are looking for: " << RESET << endl;
-    cout << " First name: ";
+    cout << PURPLE << " First name: " << RESET;
     cin >> name;
-    cout << " Last name: ";
+    cout << CYAN << " Last name: " << RESET;
     cin >> surname;
 
     cout << endl;
