@@ -53,7 +53,7 @@ struct DATE
 struct ADDRESS
 {
     string streetName;
-    string streetNumber;
+    int streetNumber;
 };
 
 struct STUDENT
@@ -114,10 +114,11 @@ int readInt()
     return number;
 }
 
-void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
-void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
-void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
-void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index);
+void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school);
+void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school);
+void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school);
+void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school);
+void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school);
 
 
 /*=============================================================================*/
@@ -728,7 +729,7 @@ void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
     tch_index = 2;
 }
 
-//BANAN
+
 void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int numOfTeams = teachers[tch_index].numOfTeams;
@@ -902,6 +903,40 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 
 /*==========================================================================*/
 
+void initSchool(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL& school)
+{
+    school.name = "Vocational School for Programming and Innovation";
+    school.city = "Burgas";
+    school.address.streetName = "Zahari Stoyanov";
+    school.address.streetNumber = 5;
+
+    for (int i = 0; i < st_index; i++)
+    {
+        school.students[i] = students[i];
+    }
+
+    for (int i = 0; i < t_index; i++)
+    {
+        school.teams[i] = teams[i];
+    }
+
+    for (int i = 0; i < tch_index; i++)
+    {
+        school.teachers[i] = teachers[i];
+    }
+}
+
+void showSchoolAddress(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
+{
+    cout << "Name: " << school->name << endl;
+    cout << "City: " << school->city << endl;
+    cout << "Address: " << endl;
+    cout << "  Street name: " << school->address.streetName << endl;
+    cout << "  Street number: " << school->address.streetNumber << endl<<endl;
+}
+
+/*==========================================================================*/
+
 void spaces(int count)
 {
     for (int i = 0; i < count; i++)
@@ -945,7 +980,7 @@ bool returnBack()
 }
 
 
-void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -992,15 +1027,15 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
             cont = returnBack();
             break;
         case 5:
-            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
-void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -1045,15 +1080,15 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
             cont = returnBack();
             break;
         case 5:
-            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
-void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -1096,15 +1131,15 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
             cont = returnBack();
             break;
         case 5:
-            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
-void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -1154,15 +1189,15 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
             cont = returnBack();
             break;
         case 6:
-            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
-void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -1196,15 +1231,15 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 
             break;
         case 3:
-            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
-void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 
 {
     bool cont = true;
@@ -1250,25 +1285,24 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
             cont = returnBack();
             break;
         case 5:
-            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
-    displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
 
 
 
-void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
     {
         int userChoice = 0;
 
-        //CHERESHA
         cout << endl;
     
         cout << YELLOW "  ____ _____ _   _ ____  _____ _   _ _____ ____  " << endl;
@@ -1312,28 +1346,27 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
             cont = returnBack();
             break;
         case 4:
-            searchStudentMenu(students, st_index, teams, t_index, teachers, tch_index);
+            searchStudentMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 5:
-            updateStudentInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
+            updateStudentInfoMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 6:
-            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
 }
 
-void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
     {
         int userChoice = 0;
-        //Praskova
         
         cout <<GREEN<< "  _____         " << endl;
         cout << " |_   _|__  __ _ _ __ ___  ___" << endl;
@@ -1379,22 +1412,22 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
             cont = returnBack();
             break;
         case 4:
-            searchTeamMenu(students, st_index, teams, t_index, teachers, tch_index);
+            searchTeamMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 5:
-            updateTeamInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
+            updateTeamInfoMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 6:
-            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
     }
 }
 
-void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index)
+void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
     while (cont == true)
@@ -1446,15 +1479,74 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
             cont = returnBack();
             break;
         case 4:
-            searchTeacherMenu(students, st_index, teams, t_index, teachers, tch_index);
+            searchTeacherMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 5:
-            updateTeacherInfoMenu(students, st_index, teams, t_index, teachers, tch_index);
+            updateTeacherInfoMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = returnBack();
             break;
         case 6:
-            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index, school);
+            cont = false;
+            break;
+        }
+    }
+}
+
+void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
+{
+    bool cont = true;
+    while (cont == true)
+    {
+        int  userChoice = 0;
+
+        cout << endl;
+
+        cout << "SCHOOL" << endl << endl;
+
+        cout << "  ================================================" << endl;
+        cout << "||" << BLUE << "1)" << RESET << " Show the address of the school" << "               ||" << endl;
+        cout << "||" << PURPLE << "2)" << RESET << " Show a list of all the students in the school" << "||" << endl;
+        cout << "||" << RED << "3)" << RESET << " Show a list of all the teams in the school" << "   ||" << endl;
+        cout << "||" << YELLOW << "4)" << RESET << " Show a list of all the teachers in the school" << "||" << endl;
+        cout << "||" << GRAY << "5)" << RESET << " Return back to the Main Menu" << "                 ||" << endl;
+        cout << "  ================================================";
+
+        cout << endl<<endl;
+
+        cout << "Enter your choice: ";
+        userChoice = readInt();
+
+        while (userChoice > 5 or userChoice < 1)
+        {
+            cout << endl;
+            cout << RED << "The number you enter has to be between 1 and 5! Please, try again: " << RESET;
+            userChoice = readInt();
+        }
+
+        system("cls");
+
+        switch (userChoice)
+        {
+        case 1:
+            showSchoolAddress(students, st_index, teams, t_index, teachers, tch_index, school);
+            cont = returnBack();
+            break;
+        case 2:
+            showStudents(students, st_index);
+            cont = returnBack();
+            break;
+        case 3:
+            showTeams(students, teams, t_index);
+            cont = returnBack();
+            break;
+        case 4:
+            showTeachers(teams, teachers, tch_index);
+            cont = returnBack();
+            break;
+        case 5:
+            displayMainMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             cont = false;
             break;
         }
@@ -1462,7 +1554,7 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
 }
 
 
-void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_index, TEACHER* teachers, int& tch_index)
+void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     int userChoice = 0;
 
@@ -1505,15 +1597,16 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
         switch (userChoice)
         {
         case 1:
-            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             break;
         case 2:
-            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index,school);
             break;
         case 3:
-            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index);
+            displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             break;
         case 4:
+            displaySchoolMenu(students, st_index, teams, t_index, teachers, tch_index, school);
             break;
         case 5:
             exit(0);
@@ -1529,13 +1622,15 @@ int main()
     STUDENT students[100];
     TEAM teams[30];
     TEACHER teachers[30];
+    SCHOOL school;
 
     int st_index = 0, t_index = 0, tch_index = 0;
 
     initStudents(students, st_index);
     initTeams(students, st_index, teams, t_index);
     initTeachers(teams, teachers, tch_index);
+    initSchool(students, st_index, teams, t_index, teachers, tch_index, school);
 
     greetings();
-    displayMainMenu(students, st_index, teams, t_index, teachers, tch_index);
+    displayMainMenu(students, st_index, teams, t_index, teachers, tch_index, &school);
 }
