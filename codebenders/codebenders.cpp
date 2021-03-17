@@ -1666,7 +1666,6 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
         cout << endl;
         cout << endl;
 
-        //MANDARINA
         cout << "Which set of data would you like to work with?" << endl << endl;
         cout << "  =================" << endl;
         cout <<"||"<< YELLOW << "1)" << RESET<<" Students" <<"      ||"<< endl;
