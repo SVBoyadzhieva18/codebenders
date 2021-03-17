@@ -322,6 +322,7 @@ void updateStudentEmail(STUDENT* students)
 
 void searchStudentByName(STUDENT* students, int& index)
 {
+    int result = 0;
     string name, surname;
     cout << YELLOW << "Enter the first and last name of the student you are looking for: " << RESET << endl;
     cout << PURPLE << " First name: " << RESET;
@@ -336,12 +337,18 @@ void searchStudentByName(STUDENT* students, int& index)
         if (students[i].name == name and students[i].surname == surname)
         {
             showStudent(students, i);
+            cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
-void seacrhStudentsByClass(STUDENT* students, int& index)
+void searchStudentsByClass(STUDENT* students, int& index)
 {
+    int result = 0;
     int schoolYear;
     char className;
     cout << YELLOW << "Show all the students from this class: " << RESET << endl;
@@ -365,12 +372,17 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
         {
             showStudent(students, i);
             cout << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 void searchStudentsByRole(STUDENT* students, int& index)
 {
+    int result = 0;
     int choice;
     role option;
 
@@ -406,12 +418,18 @@ void searchStudentsByRole(STUDENT* students, int& index)
         {
             showStudent(students, i);
             cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 void searchStudentsWithoutATeam(STUDENT* students, int& index)
 {
+    int result = 0;
+
     cout << YELLOW << "Students that haven't joined any team yet: " << RESET << endl << endl;
 
     for (int i = 0; i < index; i++)
@@ -420,8 +438,12 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
         {
             showStudent(students, i);
             cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 /*===========================================================================*/
@@ -641,6 +663,7 @@ void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 
 void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
 {
+    int result = 0;
     string name;
     cout << GREEN << "Enter the name of the team you are looking for: " << RESET;
     cin >> name;
@@ -652,15 +675,20 @@ void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
         if (teams[i].name == name)
         {
             showTeam(students, teams, i);
-            cout << endl << endl;;
+            cout << endl << endl;
+            result++;
         }
     }
 
     cout << endl;
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
 {
+    int result = 0;
     int choice;
     status option;
 
@@ -695,13 +723,17 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
         {
             showTeam(students, teams,  i);
             cout << endl << endl;
+            result++;
         }
     }
 
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
 {
+    int result = 0;
     int number;
     cout << GREEN << "Enter teams with how many teammates you want to see (2-4): " << RESET;
     number = readInt();
@@ -721,12 +753,18 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
         {
             showTeam(students, teams, i);
             cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
 {
+    int result = 0;
+
     cout << GREEN << "Teams that haven't got any teacher yet: " << RESET << endl << endl;
 
     for (int i = 0; i < t_index; i++)
@@ -735,8 +773,12 @@ void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
         {
             showTeam(students, teams, i);
             cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 
@@ -902,6 +944,7 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
 
 void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
+    int result = 0;
     string name, surname;
     cout << CYAN << "Enter the first and last name of the teacher you are looking for: " << RESET << endl;
     cout << PURPLE << "First name: " << RESET;
@@ -917,8 +960,12 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
         {
             showTeacher(teams, teachers, i);
             cout << endl << endl;
+            result++;
         }
     }
+
+    if (result == 0)
+        cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
 
@@ -1036,7 +1083,7 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
             cont = returnBack();
             break;
         case 2:
-            seacrhStudentsByClass(students, st_index);
+            searchStudentsByClass(students, st_index);
             cont = returnBack();
             break;
         case 3:
