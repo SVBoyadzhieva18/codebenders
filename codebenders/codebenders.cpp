@@ -968,6 +968,31 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+void searchTeacherByTeam(TEAM* teams, TEACHER* teachers, int& tch_index)
+{
+    int result = 0;
+    string email;
+    cout << "Enter the e-mail of the teacher you would like to see: ";
+    cin >> email;
+
+    cout << endl;
+
+    for (int i = 0; i < tch_index; i++)
+    {
+        if (teachers[i].email == email)
+        {
+            showTeacher(teams, teachers, i);
+            cout << endl << endl;
+            result++;
+        }
+   }
+
+    if (result == 0)
+    {
+        cout << endl;
+        cout << GRAY << "Nothing was found!" << RESET << endl;
+    }
+}
 
 /*==========================================================================*/
 
@@ -1274,7 +1299,7 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 
         cout <<CYAN<< "By what criteria do you want to search for a teacher/-s?" <<RESET<< endl << endl;
         cout <<BLUE<< "1)"<<RESET<<" Name" << endl;
-        cout <<GREEN<< "2)"<<RESET<<" Team" << endl;
+        cout <<GREEN<< "2)"<<RESET<<" E-mail" << endl;
         cout <<GRAY<< "3)"<<RESET<<" Return back to Teachers Menu" << endl << endl;
 
         cout << "Enter your choice: ";
@@ -1296,7 +1321,8 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
             cont = returnBack();
             break;
         case 2:
-
+            searchTeacherByTeam(teams, teachers, tch_index);
+            cont = returnBack();
             break;
         case 3:
             displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
@@ -1574,7 +1600,7 @@ void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
         cout << "SCHOOL" << endl << endl;
 
         cout << "  ================================================" << endl;
-        cout << "||" << BLUE << "1)" << RESET << " Show the address of the school" << "               ||" << endl;
+        cout << "||" << BLUE << "1)" << RESET << " Show the name and address of the school" << "               ||" << endl;
         cout << "||" << PURPLE << "2)" << RESET << " Show a list of all the students in the school" << "||" << endl;
         cout << "||" << RED << "3)" << RESET << " Show a list of all the teams in the school" << "   ||" << endl;
         cout << "||" << YELLOW << "4)" << RESET << " Show a list of all the teachers in the school" << "||" << endl;
