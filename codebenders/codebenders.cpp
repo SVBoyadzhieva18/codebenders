@@ -3,6 +3,7 @@
 #include <stdlib.h>
 using namespace std;
 
+//defining colors to use in the output
 #define RESET   "\033[0m"
 
 #define RED     "\033[1;91m" 
@@ -98,6 +99,7 @@ struct SCHOOL
 };
 
 
+//Asks the user to input an integer and outputs an error message if they enter something else
 int readInt() 
 {
     int number;
@@ -123,6 +125,7 @@ void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 
 /*=============================================================================*/
 
+//Statically fills up an array of students
 void initStudents(STUDENT* students, int& index)
 {
     students[0] = { "Maria", "Georgieva", 10, 'A', role::scrumTrainer, "mariaG@abv.bg", 1 };
@@ -142,6 +145,7 @@ void initStudents(STUDENT* students, int& index)
     index = 12;
 }
 
+//Outputs a single student from the students array
 void showStudent(STUDENT* students, int index)
 {
     cout << YELLOW << "  Student ID: " << RESET << index + 1 << endl;
@@ -159,6 +163,7 @@ void showStudent(STUDENT* students, int index)
     cout << GREEN << "  E-mail: " << RESET << UWhite << students[index].email << RESET << endl;
 }
 
+//Outputs a list of all of the students in the students array
 void showStudents(STUDENT* students, int index)
 {
 
@@ -170,6 +175,7 @@ void showStudents(STUDENT* students, int index)
     }
 }
 
+//Inputs data for a new student in the students array
 void enterStudent(STUDENT* students, int& index)
 {
     int choice;
@@ -219,6 +225,7 @@ void enterStudent(STUDENT* students, int& index)
     index++;
 }
 
+//Deletes a particular student from the students array
 void deleteStudent(STUDENT* students, int& index)
 {
     int position;
@@ -235,6 +242,7 @@ void deleteStudent(STUDENT* students, int& index)
     index--;
 }
 
+//Edits the name of a student
 void updateStudentName(STUDENT* students)
 {
     int position;
@@ -250,6 +258,7 @@ void updateStudentName(STUDENT* students)
     cin >> students[position].surname;
 }
 
+//Edits the class of a student
 void updateStudentClass(STUDENT* students)
 {
     int position;
@@ -272,6 +281,7 @@ void updateStudentClass(STUDENT* students)
     }
 }
 
+//Edits the team role of a student
 void updateStudentRole(STUDENT* students)
 {
     int position;
@@ -308,6 +318,7 @@ void updateStudentRole(STUDENT* students)
         students[position].teamRole = role::developerFrontend;
 }
 
+//Edits the e-mail of a student
 void updateStudentEmail(STUDENT* students)
 {
     int position;
@@ -320,6 +331,7 @@ void updateStudentEmail(STUDENT* students)
     cin >> students[position].email;
 }
 
+//Searches for students by their first and last name
 void searchStudentByName(STUDENT* students, int& index)
 {
     int result = 0;
@@ -346,6 +358,7 @@ void searchStudentByName(STUDENT* students, int& index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for students by their class (year and class name)
 void searchStudentsByClass(STUDENT* students, int& index)
 {
     int result = 0;
@@ -380,6 +393,7 @@ void searchStudentsByClass(STUDENT* students, int& index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for students by their role in their team
 void searchStudentsByRole(STUDENT* students, int& index)
 {
     int result = 0;
@@ -426,6 +440,7 @@ void searchStudentsByRole(STUDENT* students, int& index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for students who don't have a team yet
 void searchStudentsWithoutATeam(STUDENT* students, int& index)
 {
     int result = 0;
@@ -448,6 +463,7 @@ void searchStudentsWithoutATeam(STUDENT* students, int& index)
 
 /*===========================================================================*/
 
+//Statically fills up an array of teams
 void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
 {
     teams[0] = { "Vikings", "We are here to win!", {10,2,2021}, {students[2], students[4], students[10]}, status::notActive, 3, 1 };
@@ -457,6 +473,7 @@ void initTeams(STUDENT* students, int& index, TEAM* teams, int& t_index)
     t_index = 3;
 }
 
+//Outputs a single team from the teams array
 void showTeam(STUDENT* students, TEAM* teams, int& t_index)
 {
     cout << CYAN << "ID: " << RESET << t_index + 1 << endl;
@@ -489,6 +506,7 @@ void showTeam(STUDENT* students, TEAM* teams, int& t_index)
         cout << GRAY << "Not archived" << RESET;
 }
 
+//Outputs a list of all of the teams in the teams array
 void showTeams(STUDENT* students, TEAM* teams, int& t_index)
 {
     cout << GREEN << "List of teams: " << RESET << endl << endl;
@@ -499,6 +517,7 @@ void showTeams(STUDENT* students, TEAM* teams, int& t_index)
     }
 }
 
+//Inputs data for a new team in the teams array
 void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
 {
     int number, id;
@@ -537,6 +556,7 @@ void enterTeam(STUDENT* students, TEAM* teams, int& t_index)
     t_index++;
 }
 
+//Deletes a particular team from the teams array
 void deleteTeam(TEAM* teams, int& t_index)
 {
     int position;
@@ -553,6 +573,7 @@ void deleteTeam(TEAM* teams, int& t_index)
     t_index--;
 }
 
+//Edits the name of a team
 void updateTeamName(TEAM* teams)
 {
     int position;
@@ -566,6 +587,7 @@ void updateTeamName(TEAM* teams)
     getline(cin, teams[position].name);
 }
 
+//Edits the description of a team
 void updateTeamDescription(TEAM* teams)
 {
     int position;
@@ -580,6 +602,7 @@ void updateTeamDescription(TEAM* teams)
     getline(cin, teams[position].description);
 }
 
+//Edits the status of a team
 void updateTeamStatus(TEAM* teams)
 {
     int position;
@@ -612,6 +635,7 @@ void updateTeamStatus(TEAM* teams)
         teams[position].teamStatus = status::notArchived;
 }
 
+//Adds a new member to a particular team
 void addStudentToTeam(STUDENT* students, TEAM* teams)
 {
     int position;
@@ -630,6 +654,7 @@ void addStudentToTeam(STUDENT* students, TEAM* teams)
     students[id - 1].hasATeam = true;
 }
 
+//Removes a member from a particular team
 void removeStudentFromTeam(STUDENT* students, TEAM* teams)
 {
     int position;
@@ -661,6 +686,7 @@ void removeStudentFromTeam(STUDENT* students, TEAM* teams)
     students[id].hasATeam = false;
 }
 
+//Searches for teams by their name 
 void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
 {
     int result = 0;
@@ -686,6 +712,7 @@ void searchTeamByName(STUDENT* students, TEAM* teams, int& t_index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for teams by their status
 void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
 {
     int result = 0;
@@ -731,6 +758,7 @@ void searchTeamByStatus(STUDENT* students, TEAM* teams, int& t_index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for teams by the number of their members
 void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
 {
     int result = 0;
@@ -761,6 +789,7 @@ void searchTeamByNumberOfMembers(STUDENT* students, TEAM* teams, int& t_index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
+//Searches for teams which haven't been assigned a teacher yet
 void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
 {
     int result = 0;
@@ -784,6 +813,7 @@ void searchTeamsWithoutATeacher(STUDENT* students, TEAM* teams, int& t_index)
 
 /*==========================================================================*/
 
+//Statically fills up an array of teachers
 void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     teachers[0] = { "Ivelina", "Staykova", {teams[0], teams[1]}, "iStaikova@abv.bg", 2 };
@@ -792,7 +822,7 @@ void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
     tch_index = 2;
 }
 
-
+//Outputs a single teacher from the teachers array
 void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int numOfTeams = teachers[tch_index].numOfTeams;
@@ -806,6 +836,7 @@ void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
     cout << YELLOW<<"E-mail: "<<RESET <<UWhite<< teachers[tch_index].email <<RESET<< endl;
 }
 
+//Outputs a list of all of the teachers in the teachers array
 void showTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     cout <<CYAN<< "List of teachers: " << RESET<<endl << endl;
@@ -816,6 +847,7 @@ void showTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
     }
 }
 
+//Inputs data for a new teacher in the teachers array
 void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int number, id;
@@ -847,6 +879,7 @@ void enterTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
     tch_index++;
 }
 
+//Deletes a particular teacher from the teachers array
 void deleteTeacher(TEACHER* teachers, int& tch_index)
 {
     int position;
@@ -863,6 +896,7 @@ void deleteTeacher(TEACHER* teachers, int& tch_index)
     tch_index--;
 }
 
+//Edits the name of a teacher
 void updateTeacherName(TEACHER* teachers)
 {
     int position;
@@ -878,6 +912,7 @@ void updateTeacherName(TEACHER* teachers)
     cin >> teachers[position].surname;
 }
 
+//Edits the email of a teacher
 void updateTeacherEmail(TEACHER* teachers)
 {
     int position;
@@ -890,6 +925,7 @@ void updateTeacherEmail(TEACHER* teachers)
     cin >> teachers[position].email;
 }
 
+//Assigns a new team to a particular teacher
 void addTeamToTeacher(TEAM* teams, TEACHER* teachers)
 {
     int position;
@@ -909,6 +945,7 @@ void addTeamToTeacher(TEAM* teams, TEACHER* teachers)
     teams[id - 1].hasATeacher = true;
 }
 
+//Removes a team from a particular teacher
 void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
 {
     int position;
@@ -942,6 +979,7 @@ void removeTeamFromTeacher(TEAM* teams, TEACHER* teachers)
     teams[id].hasATeacher = false;
 }
 
+//Searches for teachers by their first and last names
 void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int result = 0;
@@ -968,7 +1006,8 @@ void searchTeacherByName(TEAM* teams, TEACHER* teachers, int& tch_index)
         cout << GRAY << "Nothing was found!" << RESET << endl;
 }
 
-void searchTeacherByTeam(TEAM* teams, TEACHER* teachers, int& tch_index)
+//Searches for teachers by their emails
+void searchTeacherByEmail(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int result = 0;
     string email;
@@ -996,6 +1035,7 @@ void searchTeacherByTeam(TEAM* teams, TEACHER* teachers, int& tch_index)
 
 /*==========================================================================*/
 
+//Initializes a variable of type SCHOOL
 void initSchool(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL& school)
 {
     school.name = "Vocational School for Programming and Innovation";
@@ -1019,6 +1059,7 @@ void initSchool(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEA
     }
 }
 
+//Outputs information about the school
 void showSchoolAddress(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     cout << "Name: " << school->name << endl;
@@ -1030,6 +1071,7 @@ void showSchoolAddress(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 
 /*==========================================================================*/
 
+//print spaces
 void spaces(int count)
 {
     for (int i = 0; i < count; i++)
@@ -1038,11 +1080,13 @@ void spaces(int count)
     }
 }
 
+//Displays a greeting for the user in the beginning when the program is started
 void greetings()
 {
     cout << "Hello from us, the codebenders, and welcome to our program!" << endl;
 }
 
+//Asks the user if they want to stay in the same menu or to return one menu back 
 bool returnBack()
 {
     int choice;
@@ -1073,6 +1117,7 @@ bool returnBack()
 }
 
 
+//Shows options for searching for students by different criteria
 void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1128,6 +1173,7 @@ void searchStudentMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
+//Shows options for editing different information about a particular student
 void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1181,6 +1227,7 @@ void  updateStudentInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& 
     displayStudentsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
+//Shows options for searching for teams by different criteria
 void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1232,6 +1279,7 @@ void searchTeamMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index,
     displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
+//Shows options for editing different information about a particular team
 void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1290,6 +1338,7 @@ void updateTeamInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_in
     displayTeamsMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
+//Shows options for searching for teachers by different criteria
 void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1321,7 +1370,7 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
             cont = returnBack();
             break;
         case 2:
-            searchTeacherByTeam(teams, teachers, tch_index);
+            searchTeacherByEmail(teams, teachers, tch_index);
             cont = returnBack();
             break;
         case 3:
@@ -1333,6 +1382,7 @@ void searchTeacherMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
     displayTeachersMenu(students, st_index, teams, t_index, teachers, tch_index, school);
 }
 
+//Shows options for editing different information about a particular teacher
 void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 
 {
@@ -1389,7 +1439,7 @@ void updateTeacherInfoMenu(STUDENT* students, int& st_index, TEAM* teams, int& t
 
 
 
-
+//Shows a sub menu with options connected with students
 void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1455,6 +1505,7 @@ void displayStudentsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     }
 }
 
+//Shows a sub menu with options connected with teams
 void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1521,6 +1572,7 @@ void displayTeamsMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_inde
     }
 }
 
+//Shows a sub menu with options connected with teachers 
 void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1588,6 +1640,7 @@ void displayTeachersMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_i
     }
 }
 
+//Shows a sub menu with options connected with the school
 void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     bool cont = true;
@@ -1653,6 +1706,7 @@ void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
 }
 
 
+//Shows the main menu of the program
 void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_index, TEACHER* teachers, int& tch_index, SCHOOL* school)
 {
     int userChoice = 0;
