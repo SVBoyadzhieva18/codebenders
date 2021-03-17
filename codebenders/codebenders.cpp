@@ -173,7 +173,7 @@ void showStudents(STUDENT* students, int index)
 void enterStudent(STUDENT* students, int& index)
 {
     int choice;
-    //YAGODA
+  
     cout << YELLOW << "Enter info about student:" << RESET << endl;
 
     cout <<PURPLE " First name: "<<RESET;
@@ -186,8 +186,15 @@ void enterStudent(STUDENT* students, int& index)
     
     cout << BLUE << "  School year: " << RESET;
     students[index].schoolYear = readInt();
-    cout << GREEN << "  Class name: " << RESET;
+    cout << GREEN << "  Class name (capital letter): " << RESET;
     cin >> students[index].className;
+
+    while (students[index].className != 'A' and students[index].className != 'B' and students[index].className != 'V' and students[index].className != 'G')
+    {
+        cout << endl;
+        cout << RED << "The name of the class should be A, B, V or G. Please, try again: " << RESET;
+        cin >> students[index].className;
+    }
 
     cout << " Role in team: " << endl;
     cout << "  1. Scrum Trainer" << endl;
@@ -256,6 +263,13 @@ void updateStudentClass(STUDENT* students)
     students[position].schoolYear = readInt();
     cout << " Class name (capital letter): ";
     cin >> students[position].className;
+
+    while (students[position].className != 'A' and students[position].className != 'B' and students[position].className != 'V' and students[position].className != 'G')
+    {
+        cout << endl;
+        cout << RED << "The name of the class should be A, B, V or G. Please, try again: " << RESET;
+        cin >> students[position].className;
+    }
 }
 
 void updateStudentRole(STUDENT* students)
@@ -335,6 +349,13 @@ void seacrhStudentsByClass(STUDENT* students, int& index)
     schoolYear = readInt();
     cout << " Class name: ";
     cin >> className;
+
+    while (className != 'A' and className != 'B' and className != 'V' and className != 'G')
+    {
+        cout << endl;
+        cout << RED << "The name of the class should be A, B, V or G. Please, try again: " << RESET;
+        cin >> className;
+    }
 
     cout << endl;
 
@@ -733,7 +754,7 @@ void initTeachers(TEAM* teams, TEACHER* teachers, int& tch_index)
 void showTeacher(TEAM* teams, TEACHER* teachers, int& tch_index)
 {
     int numOfTeams = teachers[tch_index].numOfTeams;
-    cout << BLUE<<"ID: " << tch_index + 1<<RESET<< endl;
+    cout << BLUE<<"ID: " << RESET << tch_index + 1<< endl;
     cout << CYAN << "First and last name: " << RESET << teachers[tch_index].name << " " << teachers[tch_index].surname << endl;
     cout << PURPLE << "Teams they assist: " << RESET << endl;
     for (int i = 0; i < numOfTeams; i++)
@@ -1573,7 +1594,7 @@ void displayMainMenu(STUDENT* students, int& st_index, TEAM* teams,  int& t_inde
         cout << endl;
 
         //MANDARINA
-        cout << "Which sets of data would you like to work with?" << endl << endl;
+        cout << "Which set of data would you like to work with?" << endl << endl;
         cout << "  =================" << endl;
         cout <<"||"<< YELLOW << "1)" << RESET<<" Students" <<"      ||"<< endl;
         cout <<"||"<< GREEN << "2)" << RESET<<" Teams"  <<"         ||"<< endl;
