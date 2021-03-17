@@ -1596,11 +1596,16 @@ void displaySchoolMenu(STUDENT* students, int& st_index, TEAM* teams, int& t_ind
         int  userChoice = 0;
 
         cout << endl;
-
-        cout << "SCHOOL" << endl << endl;
+        cout << BLUE << "  ____   ____ _   _  ___   ___  _     " << endl;
+            cout << " / ___| / ___| | | |/ _ \\ / _ \\| |    " << endl;
+            cout << " \\___ \\| |   | |_| | | | | | | | |    " << endl;
+            cout << "  ___) | |___|  _  | |_| | |_| | |___ " << endl;
+            cout << " |____/ \\____|_| |_|\\___/ \\___/|_____|" << RESET << endl;
+            cout << endl;
+                                      
 
         cout << "  ================================================" << endl;
-        cout << "||" << BLUE << "1)" << RESET << " Show the name and address of the school" << "               ||" << endl;
+        cout << "||" << BLUE << "1)" << RESET << " Show the name and address of the school" << "      ||" << endl;
         cout << "||" << PURPLE << "2)" << RESET << " Show a list of all the students in the school" << "||" << endl;
         cout << "||" << RED << "3)" << RESET << " Show a list of all the teams in the school" << "   ||" << endl;
         cout << "||" << YELLOW << "4)" << RESET << " Show a list of all the teachers in the school" << "||" << endl;
